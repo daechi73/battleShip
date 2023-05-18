@@ -53,3 +53,15 @@ import ship from "../ship/ship";
 //     );
 //   }
 // );
+
+test("testing receiveAttack...", () => {
+  const newBoard = gameBoard();
+  const battleShip = ship("battleShip", 4);
+  newBoard.placeShip(battleShip, [0, 0]);
+  expect(newBoard.receiveAttack([0, 0])).toBe(
+    "You've hit battleShip at position [0,0]"
+  );
+  expect(newBoard.receiveAttack([0, 2])).toBe(
+    "you've missed at position [0,2]"
+  );
+});

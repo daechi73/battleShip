@@ -48,9 +48,19 @@ const gameBoard = () => {
     return board;
   };
 
+  const receiveAttack = (coordination) => {
+    let [x, y] = coordination;
+    if (board[y][x].contains == null)
+      return `you've missed at position [${coordination}]`;
+    else {
+      const ship = board[y][x].contains;
+      return `You've hit ${ship.getName()} at position [${coordination}]`;
+    }
+  };
+
   createBoard();
 
-  return { createBoard, placeShip, getBoard, checkCellOpen };
+  return { createBoard, placeShip, getBoard, checkCellOpen, receiveAttack };
 };
 
 export default gameBoard;
