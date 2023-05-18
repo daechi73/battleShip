@@ -13,16 +13,17 @@ const gameBoard = () => {
       board.push(row);
     }
   };
+
   const placeShip = (ship, startingPosition, position = "horizontal") => {
     let [startingX, startingY] = startingPosition;
     if (position === "horizontal") {
       const endPosition = startingX + ship.getLength() - 1;
-      for (let i = startingX; i < endPosition; i++) {
+      for (let i = startingX; i <= endPosition; i++) {
         board[startingY][i].contains = ship;
       }
     } else {
       const endPosition = startingY + ship.getLength() - 1;
-      for (let i = startingY; i < endPosition; i++) {
+      for (let i = startingY; i <= endPosition; i++) {
         board[i][startingY].contains = ship;
       }
     }

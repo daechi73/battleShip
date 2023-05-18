@@ -10,15 +10,16 @@ import ship from "../ship/ship";
 //   });
 // });
 
-// test("testing gameBoard.placeShip() horizontal...", () => {
-//   const newBoard = gameBoard();
-//   const battleShip = ship("battleShip", 4);
-//   newBoard.placeShip(battleShip, [0, 0]);
-//   //expect(newBoard.placeShip(battleShip, [0, 0])).toBe("ja");
-//   expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShip");
-//   expect(newBoard.getBoard()[0][1].contains.getName()).toBe("battleShip");
-//   expect(newBoard.getBoard()[0][2].contains.getName()).toBe("battleShip");
-// });
+test("testing gameBoard.placeShip() horizontal...", () => {
+  const newBoard = gameBoard();
+  const battleShip = ship("battleShip", 4);
+  newBoard.placeShip(battleShip, [0, 0]);
+  //expect(newBoard.placeShip(battleShip, [0, 0])).toBe("ja");
+  expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShip");
+  expect(newBoard.getBoard()[0][1].contains.getName()).toBe("battleShip");
+  expect(newBoard.getBoard()[0][2].contains.getName()).toBe("battleShip");
+  expect(newBoard.getBoard()[0][3].contains.getName()).toBe("battleShip");
+});
 
 test("testing gameboard.placeShip() vertical...", () => {
   const newBoard = gameBoard();
