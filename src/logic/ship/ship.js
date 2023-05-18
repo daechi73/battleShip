@@ -1,4 +1,5 @@
 const ship = (name, length) => {
+  let position = "horizontal";
   let timesHit = 0;
   const hit = () => {
     timesHit++;
@@ -15,8 +16,23 @@ const ship = (name, length) => {
   const getName = () => {
     return name;
   };
+  const getPosition = () => {
+    return position;
+  };
+  const changePosition = () => {
+    if (position === "horizontal") position = "veritcal";
+    else position = "horizontal";
+  };
 
-  return { getName, getLength, hit, getTimesHit, isSunk };
+  return {
+    getName,
+    getLength,
+    hit,
+    getTimesHit,
+    isSunk,
+    getPosition,
+    changePosition,
+  };
 };
 
 export default ship;

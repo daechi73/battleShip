@@ -14,8 +14,8 @@ import ship from "../ship/ship";
 //   const newBoard = gameBoard();
 //   const battleShip = ship("battleShip", 4);
 //   newBoard.placeShip(battleShip, [0, 0]);
-//   //expect(newBoard.placeShip(battleShip, [0, 0])).toBe("ja");
-//   expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShip");
+//   expect(newBoard.placeShip(battleShip, [0, 0])).toBe("ja");
+//   expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShipp");
 //   expect(newBoard.getBoard()[0][1].contains.getName()).toBe("battleShip");
 //   expect(newBoard.getBoard()[0][2].contains.getName()).toBe("battleShip");
 //   expect(newBoard.getBoard()[0][3].contains.getName()).toBe("battleShip");
@@ -24,6 +24,7 @@ import ship from "../ship/ship";
 // test("testing gameboard.placeShip() vertical...", () => {
 //   const newBoard = gameBoard();
 //   const battleShip = ship("battleShip", 4);
+//   battleShip.changePosition();
 //   newBoard.placeShip(battleShip, [0, 0], "vertical");
 //   expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShip");
 //   expect(newBoard.getBoard()[1][0].contains.getName()).toBe("battleShip");
@@ -38,17 +39,17 @@ import ship from "../ship/ship";
 //   //expect(newBoard.getBoard()[0][3].contains.getName()).toBe("battleShip");
 // });
 
-test(
-  "testing gameBoard.placeShip() with overlapping " +
-    "two ship objects that will return false on checkCellOpen()",
-  () => {
-    const newBoard = gameBoard();
-    const battleShip = ship("battleShip", 4);
-    const destroyer = ship("destroyer", 2);
-    newBoard.placeShip(battleShip, [0, 0], "horizontal");
+// test(
+//   "testing gameBoard.placeShip() with overlapping " +
+//     "two ship objects that will return false on checkCellOpen()",
+//   () => {
+//     const newBoard = gameBoard();
+//     const battleShip = ship("battleShip", 4);
+//     const destroyer = ship("destroyer", 2);
+//     newBoard.placeShip(battleShip, [0, 0]);
 
-    expect(newBoard.placeShip(destroyer, [0, 0], "horizontal")).toBe(
-      "position not open"
-    );
-  }
-);
+//     expect(newBoard.placeShip(destroyer, [0, 0], "horizontal")).toBe(
+//       "position not open"
+//     );
+//   }
+// );

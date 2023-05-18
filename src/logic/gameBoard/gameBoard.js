@@ -26,18 +26,18 @@ const gameBoard = () => {
     }
     return true;
   };
-  const placeShip = (ship, startingPosition, position = "horizontal") => {
+  const placeShip = (ship, startingPosition) => {
     let [startingX, startingY] = startingPosition;
-    if (position === "horizontal") {
+    if (ship.getPosition() === "horizontal") {
       const endPosition = startingX + ship.getLength() - 1;
-      if (!checkCellOpen(startingX, startingY, endPosition, position))
+      if (!checkCellOpen(startingX, startingY, endPosition, ship.getPosition()))
         return "position not open";
       for (let i = startingX; i <= endPosition; i++) {
         board[startingY][i].contains = ship;
       }
     } else {
       const endPosition = startingY + ship.getLength() - 1;
-      if (!checkCellOpen(startingX, startingY, endPosition, position))
+      if (!checkCellOpen(startingX, startingY, endPosition, ship.getPosition()))
         return "position not open";
       for (let i = startingY; i <= endPosition; i++) {
         board[i][startingY].contains = ship;
