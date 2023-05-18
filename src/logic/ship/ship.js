@@ -1,5 +1,4 @@
-const ship = (length) => {
-  const shipLength = length;
+const ship = (name, length) => {
   let timesHit = 0;
   const hit = () => {
     timesHit++;
@@ -10,8 +9,14 @@ const ship = (length) => {
   const isSunk = () => {
     return shipLength === timesHit ? true : false;
   };
+  const getLength = () => {
+    return length;
+  };
+  const getName = () => {
+    return name;
+  };
 
-  return { hit, getTimesHit, isSunk };
+  return { getName, getLength, hit, getTimesHit, isSunk };
 };
 
 export default ship;
