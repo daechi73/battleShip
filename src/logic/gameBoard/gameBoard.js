@@ -1,8 +1,15 @@
 const cell = (row, column) => {
-  return { row, column, charCode: row + "" + column, contains: null };
+  return {
+    row,
+    column,
+    charCode: row + "" + column,
+    contains: null,
+    hit: false,
+  };
 };
 const gameBoard = () => {
   const board = [];
+  let numberOfSunkenShip = 0;
 
   const createBoard = () => {
     for (let i = 0; i < 10; i++) {
@@ -50,10 +57,22 @@ const gameBoard = () => {
 
   const receiveAttack = (coordination) => {
     let [x, y] = coordination;
-    if (board[y][x].contains == null)
+    if (board[y][x].contains == null) {
+      board[y][x].hit = true;
       return `you've missed at position [${coordination}]`;
-    else {
+    } else {
       const ship = board[y][x].contains;
+      ship.hit();
+      board[y][x].hit = true;
+      if (ship.isSunk()) {
+        numberOfSunkenShip++;
+        if (numberOfSunkenShip === 2)
+          return `
+          You've hit ${ship.getName()} at position [${coordination}]
+          you've sunk a ${ship.getName()}!
+          You've sunken all the ships`;
+        return `you've sunk a ${ship.getName()}!`;
+      }
       return `You've hit ${ship.getName()} at position [${coordination}]`;
     }
   };

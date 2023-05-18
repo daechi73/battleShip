@@ -54,14 +54,54 @@ import ship from "../ship/ship";
 //   }
 // );
 
-test("testing receiveAttack...", () => {
+// test("testing receiveAttack...", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 4);
+//   newBoard.placeShip(battleShip, [0, 0]);
+//   expect(newBoard.receiveAttack([0, 0])).toBe(
+//     "You've hit battleShip at position [0,0]"
+//   );
+//   expect(newBoard.receiveAttack([0, 2])).toBe(
+//     "you've missed at position [0,2]"
+//   );
+//   expect(newBoard.getBoard()[2][0].hit).toBe(true);
+// });
+
+// test("testing isSunk being implemented with receiveAttack with one ship...", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 4);
+//   newBoard.placeShip(battleShip, [0, 0]);
+//   expect(newBoard.receiveAttack([0, 0])).toBe(
+//     "You've hit battleShip at position [0,0]"
+//   );
+//   expect(newBoard.receiveAttack([1, 0])).toBe(
+//     "You've hit battleShip at position [1,0]"
+//   );
+//   expect(newBoard.receiveAttack([2, 0])).toBe(
+//     "You've hit battleShip at position [2,0]"
+//   );
+//   expect(newBoard.receiveAttack([3, 0])).toBe("you've sunk a battleShip!");
+// });
+
+test("testing isSunk being implemented with receiveAttack with two ships...", () => {
   const newBoard = gameBoard();
   const battleShip = ship("battleShip", 4);
+  const fishingBoat = ship("fishingBoat", 1);
   newBoard.placeShip(battleShip, [0, 0]);
+  newBoard.placeShip(fishingBoat, [0, 1]);
   expect(newBoard.receiveAttack([0, 0])).toBe(
     "You've hit battleShip at position [0,0]"
   );
-  expect(newBoard.receiveAttack([0, 2])).toBe(
-    "you've missed at position [0,2]"
+  expect(newBoard.receiveAttack([1, 0])).toBe(
+    "You've hit battleShip at position [1,0]"
   );
+  expect(newBoard.receiveAttack([2, 0])).toBe(
+    "You've hit battleShip at position [2,0]"
+  );
+  expect(newBoard.receiveAttack([3, 0])).toBe("you've sunk a battleShip!");
+
+  expect(newBoard.receiveAttack([0, 1])).toBe(`
+          You've hit fishingBoat at position [0,1]
+          you've sunk a fishingBoat!
+          You've sunken all the ships`);
 });

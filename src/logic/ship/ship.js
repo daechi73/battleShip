@@ -8,7 +8,7 @@ const ship = (name, length) => {
     return timesHit;
   };
   const isSunk = () => {
-    return shipLength === timesHit ? true : false;
+    return length === timesHit ? true : false;
   };
   const getLength = () => {
     return length;
