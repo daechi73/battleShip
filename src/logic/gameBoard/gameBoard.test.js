@@ -2,13 +2,15 @@ import gameBoard from "./gameBoard";
 import ship from "../ship/ship";
 
 test("testing gameboard...", () => {
-  // expect(gameBoard().getBoard()).toContainEqual({
-  //   charCode: "A1",
-  //   column: 1,
-  //   row: "A",
-  //   contains: null,
-  // });
+  expect(gameBoard().getBoard()[0]).toContainEqual({
+    charCode: "A4",
+    column: 4,
+    row: "A",
+    contains: null,
+  });
+});
 
+test("testing gameBoard.placeShip() horizontal...", () => {
   const newBoard = gameBoard();
   const battleShip = ship("battleShip", 4);
   newBoard.placeShip(battleShip, [0, 0]);

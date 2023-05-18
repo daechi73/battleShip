@@ -15,9 +15,11 @@ const gameBoard = () => {
   };
   const placeShip = (ship, startingPosition, position = "horizontal") => {
     let [startingX, startingY] = startingPosition;
-    const endPosition = startingX + ship.getLength() - 1;
-    for (let i = startingX; i < endPosition; i++) {
-      board[startingY][i].contains = ship;
+    if (position === "horizontal") {
+      const endPosition = startingX + ship.getLength() - 1;
+      for (let i = startingX; i < endPosition; i++) {
+        board[startingY][i].contains = ship;
+      }
     }
   };
   const getBoard = () => {
