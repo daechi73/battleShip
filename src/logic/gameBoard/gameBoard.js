@@ -13,16 +13,32 @@ const gameBoard = () => {
       board.push(row);
     }
   };
-
+  const checkCellOpen = (startingX, startingY, endPosition, position) => {
+    if (position === "horizontal") {
+      for (let i = startingX; i <= endPosition; i++) {
+        if (board[startingY][i].contains != null) return false;
+      }
+    }
+    if (position === "vertical") {
+      for (let i = startingY; i <= endPosition; i++) {
+        if (board[i][startingY].contains != null) return false;
+      }
+    }
+    return true;
+  };
   const placeShip = (ship, startingPosition, position = "horizontal") => {
     let [startingX, startingY] = startingPosition;
     if (position === "horizontal") {
       const endPosition = startingX + ship.getLength() - 1;
+      if (!checkCellOpen(startingX, startingY, endPosition, position))
+        return "position not open";
       for (let i = startingX; i <= endPosition; i++) {
         board[startingY][i].contains = ship;
       }
     } else {
       const endPosition = startingY + ship.getLength() - 1;
+      if (!checkCellOpen(startingX, startingY, endPosition, position))
+        return "position not open";
       for (let i = startingY; i <= endPosition; i++) {
         board[i][startingY].contains = ship;
       }
@@ -34,7 +50,7 @@ const gameBoard = () => {
 
   createBoard();
 
-  return { createBoard, placeShip, getBoard };
+  return { createBoard, placeShip, getBoard, checkCellOpen };
 };
 
 export default gameBoard;
