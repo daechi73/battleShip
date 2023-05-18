@@ -20,6 +20,11 @@ const gameBoard = () => {
       for (let i = startingX; i < endPosition; i++) {
         board[startingY][i].contains = ship;
       }
+    } else {
+      const endPosition = startingY + ship.getLength() - 1;
+      for (let i = startingY; i < endPosition; i++) {
+        board[i][startingY].contains = ship;
+      }
     }
   };
   const getBoard = () => {
