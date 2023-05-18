@@ -33,6 +33,11 @@ const gameBoard = () => {
     }
     return true;
   };
+  const checkCellHit = (coord) => {
+    let [x, y] = coord;
+    if (board[y][x].hit === true) return true;
+    return false;
+  };
   const placeShip = (ship, startingPosition) => {
     let [startingX, startingY] = startingPosition;
     if (ship.getPosition() === "horizontal") {
@@ -79,7 +84,7 @@ const gameBoard = () => {
 
   createBoard();
 
-  return { createBoard, placeShip, getBoard, checkCellOpen, receiveAttack };
+  return { createBoard, placeShip, getBoard, checkCellHit, receiveAttack };
 };
 
 export default gameBoard;
