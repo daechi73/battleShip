@@ -1,8 +1,18 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
 .container-main {
   display: flex;
+  align-items: center;
   gap: 10px;
+  height: 100%;
 }
 .container-player1 {
+  display: flex;
+  justify-content: center;
   width: 50%;
 }
 .container-player2 {
@@ -15,4 +25,19 @@
   border: solid;
   height: 35px;
   width: 35px;
+}
+.ship {
+  border: solid;
+}
+
+.container-port {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.port {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
