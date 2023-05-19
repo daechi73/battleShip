@@ -71,7 +71,7 @@ const gameBoard = () => {
       board[y][x].hit = true;
       if (ship.isSunk()) {
         numberOfSunkenShip++;
-        if (numberOfSunkenShip === 2)
+        if (numberOfSunkenShip === 6)
           return `
           You've hit ${ship.getName()} at position [${coordination}]
           you've sunk a ${ship.getName()}!
