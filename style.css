@@ -1,0 +1,18 @@
+.container-main {
+  display: flex;
+  gap: 10px;
+}
+.container-player1 {
+  width: 50%;
+}
+.container-player2 {
+  width: 50%;
+}
+.row {
+  display: flex;
+}
+.cell {
+  border: solid;
+  height: 35px;
+  width: 35px;
+}
