@@ -3,6 +3,8 @@ import player from "../player/computer/player";
 import computer from "../player/computer/computer";
 import ship from "../ship/ship";
 import { choosingUI } from "../../render/renderUI";
+import dragEvent from "../utility/dragDrop";
+import cellEventListner from "../utility/cellEventListner";
 
 const gamePieces = () => {
   const carrier = ship("carrier", 5);
@@ -22,6 +24,7 @@ const playGame = (playerName) => {
   const ships = gamePieces();
 
   choosingUI(playerBoard, ships);
+  dragEvent();
 };
 
 export default playGame;
