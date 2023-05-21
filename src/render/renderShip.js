@@ -8,11 +8,12 @@ const renderShip = (ship) => {
       const shipSubset = document.createElement("div");
       shipSubset.classList.add("shipSubset");
       shipSubset.dataset.subset = `${i}`;
+      //shipSubset.dataset.mainset = `${ship.getName()}`;
+      //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
       shipSubset.style.cssText = `
         height:35px;
         width:38px;
       `;
-
       boat.appendChild(shipSubset);
     }
 
@@ -21,9 +22,11 @@ const renderShip = (ship) => {
     //boat.innerHTML = `<div class="shipName">${ship.getName()}</div>`;
     //boat.textContent = `${ship.getName()}`;
     boat.draggable = "true";
+    boat.dataset.length = `${ship.getLength()}`;
   } else {
     boat.style.width = "37px";
-    boat.style.height = `${ship.length * 35}px`;
+    boat.style.height = `${ship.getLength() * 35}px`;
+    boat.dataset.length = `${ship.getLength()}`;
     boat.draggable = "true";
   }
   return boat;
