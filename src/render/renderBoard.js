@@ -8,9 +8,13 @@ const renderBoard = (board) => {
     r.classList.add(`${String.fromCharCode(65 + i)}`);
     row.forEach((column) => {
       const cell = document.createElement("div");
-      cell.classList.add(`${column.column}`);
-      cell.classList.add(`${column.charCode}`);
+      cell.dataset.column = `${column.column}`;
+      cell.dataset.row = `${column.row}`;
+      cell.dataset.coord = `${column.charCode}`;
+      // cell.classList.add(`${column.column}`);
+      // cell.classList.add(`${column.charCode}`);
       cell.classList.add("cell");
+      cell.classList.add("droppable");
       r.appendChild(cell);
     });
     containerBoard.appendChild(r);
