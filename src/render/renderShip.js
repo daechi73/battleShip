@@ -12,7 +12,7 @@ const renderShip = (ship) => {
         height:35px;
         width:38px;
       `;
-      console.log(shipSubset);
+
       boat.appendChild(shipSubset);
     }
 
