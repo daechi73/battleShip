@@ -1,2 +1,6 @@
-const main = document.querySelector(".container-main");
-main.textContent = "working";
+import renderStart from "./render/renderStartPage.js";
+import playGame from "./logic/playGame/playGame.js";
+
+//renderStart();
+
+playGame("j");
