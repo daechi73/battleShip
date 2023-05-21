@@ -15,6 +15,7 @@ body {
   justify-content: center;
   width: 50%;
 }
+
 .container-player2 {
   width: 50%;
 }
@@ -23,6 +24,7 @@ body {
 }
 .cell {
   border: solid;
+  border-width: 1px;
   height: 35px;
   width: 35px;
 }
@@ -46,6 +48,10 @@ body {
   text-align: center;
   cursor: move;
   background-color: aquamarine;
+  display: grid;
+  border: solid;
+  border-width: 1px;
+  grid-template-columns: repeat(auto-fit, 35px);
 }
 
 .ship:hover {
