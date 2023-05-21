@@ -19,13 +19,15 @@ const dragEvent = () => {
         return e.preventDefault();
       });
     });
-    document.addEventListener("drop", (e) => {
-      e.preventDefault();
-      //console.log(e.target);
-      if (e.target.classList.contains("droppable")) {
-        dragged.parentNode.removeChild(dragged);
-        return e.target.appendChild(dragged);
-      }
+    cells.forEach((cell) => {
+      cell.addEventListener("drop", (e) => {
+        e.preventDefault();
+        //console.log(e.target);
+        if (e.target.classList.contains("droppable")) {
+          dragged.parentNode.removeChild(dragged);
+          return e.target.appendChild(dragged);
+        }
+      });
     });
   });
 };
