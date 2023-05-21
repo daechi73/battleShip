@@ -4,7 +4,6 @@ import computer from "../player/computer/computer";
 import ship from "../ship/ship";
 import { choosingUI } from "../../render/renderUI";
 import dragEvent from "../utility/dragDrop";
-import cellEventListner from "../utility/cellEventListner";
 
 const gamePieces = () => {
   const carrier = ship("carrier", 5);
