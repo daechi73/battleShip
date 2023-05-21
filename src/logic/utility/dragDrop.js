@@ -1,10 +1,15 @@
 const dragEvent = () => {
   let dragged = null;
+  let shipSubset = null;
 
   const ships = document.querySelectorAll(".ship");
   const cells = document.querySelectorAll(".cell");
 
   ships.forEach((ship) => {
+    ship.addEventListener("mousedown", (e) => {
+      shipSubset = e.target.dataset.subset;
+      console.log(e.target);
+    });
     ship.addEventListener("dragstart", (e) => {
       console.log("dragstarting");
       console.log(e.target);
