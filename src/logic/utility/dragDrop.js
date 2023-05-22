@@ -15,8 +15,11 @@ const dragEvent = () => {
     ship.addEventListener("dragstart", (e) => {
       console.log("dragstarting");
       console.log(e.target);
-      console.log(`shipSubset= ${shipSubset}`);
-      if (e.target.className === "ship") return (dragged = e.target);
+      if (e.target.className === "ship") {
+        if (e.target.parentNode.classList.contains("cell"))
+          enableCell(e.target.parentNode, e.target);
+        dragged = e.target;
+      }
     });
 
     ship.addEventListener("dragend", (e) => {
@@ -31,24 +34,60 @@ const dragEvent = () => {
   cells.forEach((cell) => {
     cell.addEventListener("drop", (e) => {
       e.preventDefault();
+      console.log(e.target);
 
-      console.log(cell);
-      if (e.target.classList.contains("droppable")) {
-        dragged.parentNode.removeChild(dragged);
-        // console.log(
-        //   document.querySelector(
-        //     `[data-column="${e.target.dataset.column - (shipSubset - 1)}"]`
-        //   )
-        // );
-        const realCellToAppend = document.querySelector(
-          `[data-column="${
-            e.target.dataset.column - (shipSubset - 1)
-          }"][data-row="${e.target.dataset.row}"]`
-        );
-        return realCellToAppend.appendChild(dragged);
+      if (checkCellAvailability(e.target) === true) {
+        if (e.target.classList.contains("droppable")) {
+          dragged.parentNode.removeChild(dragged);
+          const realCellToAppend = document.querySelector(
+            `[data-column="${
+              e.target.dataset.column - (shipSubset - 1)
+            }"][data-row="${e.target.dataset.row}"]`
+          );
+          realCellToAppend.appendChild(dragged);
+          disableCell(realCellToAppend, dragged);
+        }
       }
     });
   });
+};
+
+const disableCell = (startingCell, draggedShip) => {
+  if (draggedShip.dataset.position === "horizontal") {
+    const disableFrom = startingCell.dataset.column;
+    const disableTo =
+      parseInt(startingCell.dataset.column) +
+      parseInt(draggedShip.dataset.length);
+
+    for (let i = disableFrom; i < disableTo; i++) {
+      document.querySelector(
+        `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
+      ).dataset.available = false;
+    }
+  }
+};
+
+const enableCell = (startingCell, draggedShip) => {
+  if (draggedShip.dataset.position === "horizontal") {
+    const disableFrom = startingCell.dataset.column;
+    const disableTo =
+      parseInt(startingCell.dataset.column) +
+      parseInt(draggedShip.dataset.length);
+
+    for (let i = disableFrom; i < disableTo; i++) {
+      document.querySelector(
+        `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
+      ).dataset.available = true;
+    }
+  }
+};
+
+const checkCellAvailability = (selectedCell) => {
+  if (selectedCell.dataset.available === "false") {
+    console.log("cell not available choose another");
+    return false;
+  }
+  return true;
 };
 
 export default dragEvent;
