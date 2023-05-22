@@ -23,6 +23,7 @@ const renderShip = (ship) => {
     //boat.textContent = `${ship.getName()}`;
     boat.draggable = "true";
     boat.dataset.length = `${ship.getLength()}`;
+    boat.dataset.position = `${ship.getPosition()}`;
   } else {
     boat.style.width = "37px";
     boat.style.height = `${ship.getLength() * 35}px`;
