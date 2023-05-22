@@ -35,17 +35,18 @@ const dragEvent = () => {
     cell.addEventListener("drop", (e) => {
       e.preventDefault();
       console.log(e.target);
-
-      if (checkCellAvailability(e.target, dragged) === true) {
-        if (e.target.classList.contains("droppable")) {
-          dragged.parentNode.removeChild(dragged);
-          const realCellToAppend = document.querySelector(
-            `[data-column="${
-              e.target.dataset.column - (shipSubset - 1)
-            }"][data-row="${e.target.dataset.row}"]`
-          );
-          realCellToAppend.appendChild(dragged);
-          disableCell(realCellToAppend, dragged);
+      if (checkBoundary(e.target, dragged)) {
+        if (checkCellAvailability(e.target, dragged)) {
+          if (e.target.classList.contains("droppable")) {
+            dragged.parentNode.removeChild(dragged);
+            const realCellToAppend = document.querySelector(
+              `[data-column="${
+                e.target.dataset.column - (shipSubset - 1)
+              }"][data-row="${e.target.dataset.row}"]`
+            );
+            realCellToAppend.appendChild(dragged);
+            disableCell(realCellToAppend, dragged);
+          }
         }
       }
     });
@@ -90,11 +91,6 @@ const checkCellAvailability = (startingCell, draggedShip) => {
       parseInt(draggedShip.dataset.length);
 
     for (let i = checkFrom; i < checkTo; i++) {
-      console.log(
-        document.querySelector(
-          `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
-        ).dataset.available
-      );
       if (
         document.querySelector(
           `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
@@ -108,6 +104,26 @@ const checkCellAvailability = (startingCell, draggedShip) => {
   }
 };
 
+const checkBoundary = (startingCell, draggedShip) => {
+  if (draggedShip.dataset.position === "horizontal") {
+    const checkFrom = startingCell.dataset.column;
+    const checkTo =
+      parseInt(startingCell.dataset.column) +
+      parseInt(draggedShip.dataset.length);
+
+    for (let i = checkFrom; i < checkTo; i++) {
+      if (
+        document.querySelector(
+          `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
+        ) === null
+      ) {
+        console.log("Placement outofbound, pick another spot");
+        return false;
+      }
+    }
+    return true;
+  }
+};
 const getStartEndPosition = (startingCell, draggedShip) => {};
 
 export default dragEvent;
