@@ -11,7 +11,7 @@ const gameBoard = () => {
   const board = [];
   let numberOfSunkenShip = 0;
 
-  const createBoard = () => {
+  const createBoard = (() => {
     for (let i = 0; i < 10; i++) {
       const row = [];
       for (let j = 0; j < 10; j++) {
@@ -19,7 +19,7 @@ const gameBoard = () => {
       }
       board.push(row);
     }
-  };
+  })();
   const checkCellOpen = (startingX, startingY, endPosition, position) => {
     if (position === "horizontal") {
       for (let i = startingX; i <= endPosition; i++) {
@@ -28,7 +28,24 @@ const gameBoard = () => {
     }
     if (position === "vertical") {
       for (let i = startingY; i <= endPosition; i++) {
-        if (board[i][startingY].contains != null) return false;
+        if (board[i][startingX].contains != null) return false;
+      }
+    }
+    return true;
+  };
+  const checkBoundary = (startingX, startingY, endPosition, position) => {
+    if (position === "horizontal") {
+      for (let i = startingX; i <= endPosition; i++) {
+        if (board[startingY][i] === undefined) {
+          return false;
+        }
+      }
+    }
+    if (position === "vertical") {
+      for (let i = startingY; i <= endPosition; i++) {
+        if (board[i] === undefined) {
+          return false;
+        }
       }
     }
     return true;
@@ -38,10 +55,14 @@ const gameBoard = () => {
     if (board[y][x].hit === true) return true;
     return false;
   };
+
   const placeShip = (ship, startingPosition) => {
     let [startingX, startingY] = startingPosition;
+
     if (ship.getPosition() === "horizontal") {
       const endPosition = startingX + ship.getLength() - 1;
+      if (!checkBoundary(startingX, startingY, endPosition, ship.getPosition()))
+        return "out of bounds";
       if (!checkCellOpen(startingX, startingY, endPosition, ship.getPosition()))
         return "position not open";
       for (let i = startingX; i <= endPosition; i++) {
@@ -82,9 +103,12 @@ const gameBoard = () => {
     }
   };
 
-  createBoard();
-
-  return { createBoard, placeShip, getBoard, checkCellHit, receiveAttack };
+  return {
+    placeShip,
+    getBoard,
+    checkCellHit,
+    receiveAttack,
+  };
 };
 
 export default gameBoard;
