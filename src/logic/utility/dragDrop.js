@@ -36,7 +36,7 @@ const dragEvent = () => {
       e.preventDefault();
       console.log(e.target);
 
-      if (checkCellAvailability(e.target) === true) {
+      if (checkCellAvailability(e.target, dragged) === true) {
         if (e.target.classList.contains("droppable")) {
           dragged.parentNode.removeChild(dragged);
           const realCellToAppend = document.querySelector(
@@ -69,12 +69,12 @@ const disableCell = (startingCell, draggedShip) => {
 
 const enableCell = (startingCell, draggedShip) => {
   if (draggedShip.dataset.position === "horizontal") {
-    const disableFrom = startingCell.dataset.column;
-    const disableTo =
+    const enableFrom = startingCell.dataset.column;
+    const enableTo =
       parseInt(startingCell.dataset.column) +
       parseInt(draggedShip.dataset.length);
 
-    for (let i = disableFrom; i < disableTo; i++) {
+    for (let i = enableFrom; i < enableTo; i++) {
       document.querySelector(
         `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
       ).dataset.available = true;
@@ -82,12 +82,32 @@ const enableCell = (startingCell, draggedShip) => {
   }
 };
 
-const checkCellAvailability = (selectedCell) => {
-  if (selectedCell.dataset.available === "false") {
-    console.log("cell not available choose another");
-    return false;
+const checkCellAvailability = (startingCell, draggedShip) => {
+  if (draggedShip.dataset.position === "horizontal") {
+    const checkFrom = startingCell.dataset.column;
+    const checkTo =
+      parseInt(startingCell.dataset.column) +
+      parseInt(draggedShip.dataset.length);
+
+    for (let i = checkFrom; i < checkTo; i++) {
+      console.log(
+        document.querySelector(
+          `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
+        ).dataset.available
+      );
+      if (
+        document.querySelector(
+          `[data-column="${i}"][data-row="${startingCell.dataset.row}"]`
+        ).dataset.available === "false"
+      ) {
+        console.log("cell not available choose another");
+        return false;
+      }
+    }
+    return true;
   }
-  return true;
 };
+
+const getStartEndPosition = (startingCell, draggedShip) => {};
 
 export default dragEvent;
