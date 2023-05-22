@@ -11,6 +11,7 @@ const renderBoard = (board) => {
       cell.dataset.column = `${column.column}`;
       cell.dataset.row = `${column.row}`;
       cell.dataset.coord = `${column.charCode}`;
+      cell.dataset.available = true;
       // cell.classList.add(`${column.column}`);
       // cell.classList.add(`${column.charCode}`);
       cell.classList.add("cell");
