@@ -2,12 +2,12 @@ const renderShip = (ship) => {
   const boat = document.createElement("div");
   boat.classList.add(`ship`);
   boat.id = `${ship.getName()}`;
+  boat.classList.add("horizontal");
   //boat.dataset.name = `${ship.getName()}`;
   if (ship.getPosition() === "horizontal") {
     for (let i = 1; i <= ship.getLength(); i++) {
       const shipSubset = document.createElement("div");
       shipSubset.classList.add("shipSubset");
-      shipSubset.classList.add("horizontal");
       shipSubset.dataset.subset = `${i}`;
       //shipSubset.dataset.mainset = `${ship.getName()}`;
       //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
@@ -26,10 +26,10 @@ const renderShip = (ship) => {
     boat.dataset.length = `${ship.getLength()}`;
     boat.dataset.position = `${ship.getPosition()}`;
   } else {
+    boat.classList.add("vertical");
     for (let i = 1; i <= ship.getLength(); i++) {
       const shipSubset = document.createElement("div");
       shipSubset.classList.add("shipSubset");
-      shipSubset.classList.add("vertical");
       shipSubset.dataset.subset = `${i}`;
       //shipSubset.dataset.mainset = `${ship.getName()}`;
       //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
@@ -44,6 +44,7 @@ const renderShip = (ship) => {
     boat.style.height = `${ship.getLength() * 36}px`;
     boat.dataset.length = `${ship.getLength()}`;
     boat.draggable = "true";
+    boat.dataset.position = `${ship.getPosition()}`;
   }
   return boat;
 };
