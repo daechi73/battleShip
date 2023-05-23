@@ -11,7 +11,7 @@ const gamePieces = () => {
   const cruiser = ship("cruiser", 3);
   const submarine = ship("submarine", 3);
   const destroyer = ship("destroyer", 2);
-  const scout = ship("scout", 2);
+  const scout = ship("scout", 2, "vertical");
   return [carrier, battleShip, cruiser, submarine, destroyer, scout];
 };
 
