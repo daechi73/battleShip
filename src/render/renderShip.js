@@ -7,6 +7,7 @@ const renderShip = (ship) => {
     for (let i = 1; i <= ship.getLength(); i++) {
       const shipSubset = document.createElement("div");
       shipSubset.classList.add("shipSubset");
+      shipSubset.classList.add("horizontal");
       shipSubset.dataset.subset = `${i}`;
       //shipSubset.dataset.mainset = `${ship.getName()}`;
       //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
@@ -25,8 +26,22 @@ const renderShip = (ship) => {
     boat.dataset.length = `${ship.getLength()}`;
     boat.dataset.position = `${ship.getPosition()}`;
   } else {
+    for (let i = 1; i <= ship.getLength(); i++) {
+      const shipSubset = document.createElement("div");
+      shipSubset.classList.add("shipSubset");
+      shipSubset.classList.add("vertical");
+      shipSubset.dataset.subset = `${i}`;
+      //shipSubset.dataset.mainset = `${ship.getName()}`;
+      //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
+      shipSubset.style.cssText = `
+        height:36px;
+        width:37px;
+      `;
+      boat.appendChild(shipSubset);
+    }
+
     boat.style.width = "37px";
-    boat.style.height = `${ship.getLength() * 35}px`;
+    boat.style.height = `${ship.getLength() * 36}px`;
     boat.dataset.length = `${ship.getLength()}`;
     boat.draggable = "true";
   }
