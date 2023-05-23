@@ -1,5 +1,4 @@
-const ship = (name, length) => {
-  let position = "horizontal";
+const ship = (name, length, position = "horizontal") => {
   let timesHit = 0;
   const hit = () => {
     timesHit++;
