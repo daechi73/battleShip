@@ -40,8 +40,8 @@ const renderShip = (ship) => {
       boat.appendChild(shipSubset);
     }
 
-    boat.style.width = "37px";
-    boat.style.height = `${ship.getLength() * 36}px`;
+    boat.style.width = "35px";
+    boat.style.height = `${ship.getLength() * 35}px`;
     boat.dataset.length = `${ship.getLength()}`;
     boat.draggable = "true";
     boat.dataset.position = `${ship.getPosition()}`;
