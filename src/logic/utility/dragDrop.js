@@ -4,10 +4,9 @@ const dragEvent = () => {
 
   const ships = document.querySelectorAll(".ship");
   const cells = document.querySelectorAll(".cell");
-  //console.log(cells);
   ships.forEach((ship) => {
     ship.addEventListener("mousedown", (e) => {
-      if (e.target.className === "shipSubset") {
+      if (e.target.classList.contains("shipSubset")) {
         shipSubset = e.target.dataset.subset;
         console.log(e.target);
       }
@@ -102,6 +101,24 @@ const checkCellAvailability = (startingCell, draggedShip) => {
     }
     return true;
   }
+  if (draggedShip.dataset.position === "vertical") {
+    const checkFrom = startingCell.dataset.row.charCodeAt(0);
+    const checkTo = checkFrom + parseInt(draggedShip.dataset.length);
+
+    for (let i = checkFrom; i < checkTo; i++) {
+      if (
+        document.querySelector(
+          `[data-column="${
+            startingCell.dataset.row
+          }"][data-row="${String.fromCharCode(i)}"]`
+        ).dataset.available === "false"
+      ) {
+        console.log("cell not available choose another");
+        return false;
+      }
+    }
+    return true;
+  }
 };
 
 const checkBoundary = (startingCell, draggedShip) => {
@@ -121,6 +138,27 @@ const checkBoundary = (startingCell, draggedShip) => {
         return false;
       }
     }
+    return true;
+  }
+  if (draggedShip.dataset.position === "vertical") {
+    const checkFrom = startingCell.dataset.row.charCodeAt(0);
+    const checkTo =
+      startingCell.dataset.row.charCodeAt(0) +
+      parseInt(draggedShip.dataset.length);
+
+    for (let i = checkFrom; i < checkTo; i++) {
+      if (
+        document.querySelector(
+          `[data-row="${String.fromCharCode(i)}"][data-column="${
+            startingCell.dataset.column
+          }"]`
+        ) === null
+      ) {
+        console.log("Placement outofbound, pick another spot");
+        return false;
+      }
+    }
+    if (draggedShip.dataset.position === "") return "position not set";
     return true;
   }
 };
