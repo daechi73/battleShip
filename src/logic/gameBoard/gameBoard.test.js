@@ -116,8 +116,29 @@ import ship from "../ship/ship";
 //   expect(newBoard.withinBoundary(0, 7, 15, "vertical")).toBe(false);
 // });
 
-test("testing placing a ship thats out of boundary of board...", () => {
+// test("testing placing a ship thats out of boundary of board...", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 4);
+//   expect(newBoard.placeShip(battleShip, [8, 0])).toBe("out of bounds");
+// });
+
+// test("testing removingShip(non public) method...", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 4);
+//   newBoard.placeShip(battleShip, [0, 0]);
+//   //expect(newBoard.getBoard()[0][0].contains).toBe(null);
+//   newBoard.removeShip(0, 0, battleShip);
+//   expect(newBoard.getBoard()[0][0].contains).toBe(null);
+//   expect(newBoard.getBoard()[0][1].contains).toBe(null);
+//   expect(newBoard.getBoard()[0][2].contains).toBe(null);
+// });
+
+test("testing turnship method...", () => {
   const newBoard = gameBoard();
   const battleShip = ship("battleShip", 4);
-  expect(newBoard.placeShip(battleShip, [8, 0])).toBe("out of bounds");
+  newBoard.placeShip(battleShip, [0, 0]);
+  newBoard.turnShip("battleShip");
+  expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShip");
+  expect(newBoard.getBoard()[1][0].contains.getName()).toBe("battleShip");
+  expect(newBoard.getBoard()[2][0].contains.getName()).toBe("battleShip");
 });

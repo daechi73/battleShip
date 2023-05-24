@@ -102,12 +102,41 @@ const gameBoard = () => {
       return `You've hit ${ship.getName()} at position [${coordination}]`;
     }
   };
+  const turnShip = (name) => {
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        const ship = board[i][j].contains;
+        if (ship != null) {
+          if (ship.getName() === name) {
+            removeShip(j, i, ship);
+            ship.changePosition();
+            placeShip(ship, [j, i]);
+            return;
+          }
+        }
+      }
+    }
+  };
+  const removeShip = (startingX, startingY, ship) => {
+    if (ship.getPosition() === "horizontal") {
+      const endPosition = startingX + ship.getLength() - 1;
+      for (let i = startingX; i <= endPosition; i++) {
+        board[startingY][i].contains = null;
+      }
+    } else if (ship.getPosition() === "vertical") {
+      const endPosition = startingY + ship.getLength() - 1;
+      for (let i = startingY; i <= endPosition; i++) {
+        board[i][startingX].contains = null;
+      }
+    }
+  };
 
   return {
     placeShip,
     getBoard,
     checkCellHit,
     receiveAttack,
+    turnShip,
   };
 };
 
