@@ -19,7 +19,7 @@ const ship = (name, length, position = "horizontal") => {
     return position;
   };
   const changePosition = () => {
-    if (position === "horizontal") position = "veritcal";
+    if (position === "horizontal") position = "vertical";
     else position = "horizontal";
   };
 
