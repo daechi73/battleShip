@@ -49,4 +49,6 @@ const renderShip = (ship) => {
   return boat;
 };
 
+const changePosition = (ship) => {};
+
 export default renderShip;
