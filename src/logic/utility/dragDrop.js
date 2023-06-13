@@ -2,7 +2,6 @@ const dragEvent = () => {
   let dragged = null;
   let shipSubset = null;
 
-  const ships = document.querySelectorAll(".ship");
   const cells = document.querySelectorAll(".cell");
 
   const mouseDownEvent = (e) => {
@@ -59,6 +58,7 @@ const dragEvent = () => {
   };
   const removeEvents = () => {
     console.log("removing events..");
+    const ships = document.querySelectorAll(".ship");
     ships.forEach((ship) => {
       ship.removeEventListener("mousedown", mouseDownEvent);
 
@@ -75,6 +75,7 @@ const dragEvent = () => {
     });
   };
   const addEvents = () => {
+    const ships = document.querySelectorAll(".ship");
     console.log("addingEvents...");
     ships.forEach((ship) => {
       ship.addEventListener("mousedown", mouseDownEvent);
@@ -91,8 +92,12 @@ const dragEvent = () => {
       cell.addEventListener("drop", dropEvent);
     });
   };
+  const recallDragEvents = () => {
+    removeEvents();
+    addEvents();
+  };
 
-  return { removeEvents, addEvents };
+  return { addEvents, recallDragEvents };
 };
 
 const disableCell = (startingCell, draggedShip) => {
@@ -220,6 +225,7 @@ const checkBoundary = (startingCell, draggedShip) => {
     return true;
   }
   if (draggedShip.dataset.position === "vertical") {
+    console.log("vertical boundary check..");
     const checkFrom = startingCell.dataset.row.charCodeAt(0);
     const checkTo =
       startingCell.dataset.row.charCodeAt(0) +
