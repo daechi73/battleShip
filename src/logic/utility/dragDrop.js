@@ -4,52 +4,83 @@ const dragEvent = () => {
 
   const ships = document.querySelectorAll(".ship");
   const cells = document.querySelectorAll(".cell");
-  ships.forEach((ship) => {
-    ship.addEventListener("mousedown", (e) => {
-      if (e.target.classList.contains("shipSubset")) {
-        shipSubset = e.target.dataset.subset;
-        console.log(e.target);
-      }
-    });
-    ship.addEventListener("dragstart", (e) => {
-      console.log("dragstarting");
-      console.log(e.target);
-      if (e.target.classList.contains("ship")) {
-        if (e.target.parentNode.classList.contains("cell"))
-          enableCell(e.target.parentNode, e.target);
-        dragged = e.target;
-      }
-    });
 
-    ship.addEventListener("dragend", (e) => {
-      return "drag ending";
-    });
-  });
-  cells.forEach((cell) => {
-    cell.addEventListener("dragover", (e) => {
-      return e.preventDefault();
-    });
-  });
-  cells.forEach((cell) => {
-    cell.addEventListener("drop", (e) => {
-      e.preventDefault();
+  const mouseDownEvent = (e) => {
+    if (e.target.classList.contains("shipSubset")) {
+      shipSubset = e.target.dataset.subset;
       console.log(e.target);
-      if (checkBoundary(e.target, dragged)) {
-        if (checkCellAvailability(e.target, dragged)) {
-          if (e.target.classList.contains("droppable")) {
-            dragged.parentNode.removeChild(dragged);
-            const realCellToAppend = document.querySelector(
-              `[data-column="${
-                e.target.dataset.column - (shipSubset - 1)
-              }"][data-row="${e.target.dataset.row}"]`
-            );
-            realCellToAppend.appendChild(dragged);
-            disableCell(realCellToAppend, dragged);
-          }
+    }
+  };
+  const dragstartEvent = (e) => {
+    console.log("dragstarting");
+    console.log(e.target);
+    if (e.target.classList.contains("ship")) {
+      if (e.target.parentNode.classList.contains("cell"))
+        enableCell(e.target.parentNode, e.target);
+      dragged = e.target;
+    }
+  };
+
+  const dragendEvent = (e) => {
+    return "drag ending";
+  };
+  const dragoverEvent = (e) => {
+    return e.preventDefault();
+  };
+  const dropEvent = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+    if (checkBoundary(e.target, dragged)) {
+      if (checkCellAvailability(e.target, dragged)) {
+        if (e.target.classList.contains("droppable")) {
+          console.log("hereeeee");
+          console.log(dragged.parentNode);
+          dragged.parentNode.removeChild(dragged);
+          const realCellToAppend = document.querySelector(
+            `[data-column="${
+              e.target.dataset.column - (shipSubset - 1)
+            }"][data-row="${e.target.dataset.row}"]`
+          );
+          realCellToAppend.appendChild(dragged);
+          disableCell(realCellToAppend, dragged);
         }
       }
+    }
+  };
+  const removeEvents = () => {
+    ships.forEach((ship) => {
+      console.log("removing events..");
+      ship.removeEventListener("mousedown", mouseDownEvent);
+
+      ship.removeEventListener("dragstart", dragstartEvent);
+
+      ship.removeEventListener("dragend", dragendEvent);
     });
+
+    cells.forEach((cell) => {
+      cell.removeEventListener("dragover", dragoverEvent);
+    });
+    cells.forEach((cell) => {
+      cell.removeEventListener("drop", dropEvent);
+    });
+  };
+
+  ships.forEach((ship) => {
+    ship.addEventListener("mousedown", mouseDownEvent);
+
+    ship.addEventListener("dragstart", dragstartEvent);
+
+    ship.addEventListener("dragend", dragendEvent);
   });
+
+  cells.forEach((cell) => {
+    cell.addEventListener("dragover", dragoverEvent);
+  });
+  cells.forEach((cell) => {
+    cell.addEventListener("drop", dropEvent);
+  });
+
+  return { removeEvents };
 };
 
 const disableCell = (startingCell, draggedShip) => {
@@ -156,6 +187,8 @@ const checkBoundary = (startingCell, draggedShip) => {
   if (startingCell.className === "shipSubset") {
     startingCell = startingCell.parentNode.parentNode;
   }
+  console.log("droping..");
+  //return console.log(draggedShip);
   if (draggedShip.dataset.position === "horizontal") {
     const checkFrom = startingCell.dataset.column;
     const checkTo =
@@ -196,7 +229,5 @@ const checkBoundary = (startingCell, draggedShip) => {
     return true;
   }
 };
-
-const getStartEndPosition = (startingCell, draggedShip) => {};
 
 export default dragEvent;
