@@ -1,5 +1,4 @@
 import renderShip from "../../render/renderShip";
-import dragEvent from "./dragDrop";
 const changePositionListener = (board, ships, dragEventObject) => {
   const shipSubsets = document.querySelectorAll(".shipSubset");
   shipSubsets.forEach((shipSubset) => {
