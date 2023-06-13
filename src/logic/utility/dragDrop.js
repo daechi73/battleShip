@@ -14,6 +14,7 @@ const dragEvent = () => {
   const dragstartEvent = (e) => {
     console.log("dragstarting");
     console.log(e.target);
+    console.log("dragStartEventHappening");
     if (e.target.classList.contains("ship")) {
       if (e.target.parentNode.classList.contains("cell"))
         enableCell(e.target.parentNode, e.target);
@@ -33,14 +34,23 @@ const dragEvent = () => {
     if (checkBoundary(e.target, dragged)) {
       if (checkCellAvailability(e.target, dragged)) {
         if (e.target.classList.contains("droppable")) {
-          console.log("hereeeee");
-          console.log(dragged.parentNode);
+          let realCellToAppend;
+          if (dragged.dataset.position === "horizontal") {
+            realCellToAppend = document.querySelector(
+              `[data-column="${
+                e.target.dataset.column - (shipSubset - 1)
+              }"][data-row="${e.target.dataset.row}"]`
+            );
+          } else {
+            const newRow =
+              e.target.dataset.row.charCodeAt(0) - (shipSubset - 1);
+            realCellToAppend = document.querySelector(
+              `[data-column="${
+                e.target.dataset.column
+              }"][data-row="${String.fromCharCode(newRow)}"]`
+            );
+          }
           dragged.parentNode.removeChild(dragged);
-          const realCellToAppend = document.querySelector(
-            `[data-column="${
-              e.target.dataset.column - (shipSubset - 1)
-            }"][data-row="${e.target.dataset.row}"]`
-          );
           realCellToAppend.appendChild(dragged);
           disableCell(realCellToAppend, dragged);
         }
@@ -48,8 +58,8 @@ const dragEvent = () => {
     }
   };
   const removeEvents = () => {
+    console.log("removing events..");
     ships.forEach((ship) => {
-      console.log("removing events..");
       ship.removeEventListener("mousedown", mouseDownEvent);
 
       ship.removeEventListener("dragstart", dragstartEvent);
@@ -64,23 +74,25 @@ const dragEvent = () => {
       cell.removeEventListener("drop", dropEvent);
     });
   };
+  const addEvents = () => {
+    console.log("addingEvents...");
+    ships.forEach((ship) => {
+      ship.addEventListener("mousedown", mouseDownEvent);
 
-  ships.forEach((ship) => {
-    ship.addEventListener("mousedown", mouseDownEvent);
+      ship.addEventListener("dragstart", dragstartEvent);
 
-    ship.addEventListener("dragstart", dragstartEvent);
+      ship.addEventListener("dragend", dragendEvent);
+    });
 
-    ship.addEventListener("dragend", dragendEvent);
-  });
+    cells.forEach((cell) => {
+      cell.addEventListener("dragover", dragoverEvent);
+    });
+    cells.forEach((cell) => {
+      cell.addEventListener("drop", dropEvent);
+    });
+  };
 
-  cells.forEach((cell) => {
-    cell.addEventListener("dragover", dragoverEvent);
-  });
-  cells.forEach((cell) => {
-    cell.addEventListener("drop", dropEvent);
-  });
-
-  return { removeEvents };
+  return { removeEvents, addEvents };
 };
 
 const disableCell = (startingCell, draggedShip) => {
