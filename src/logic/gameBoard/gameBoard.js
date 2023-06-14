@@ -70,6 +70,8 @@ const gameBoard = () => {
       }
     } else {
       const endPosition = startingY + ship.getLength() - 1;
+      if (!checkBoundary(startingX, startingY, endPosition, ship.getPosition()))
+        return "out of bounds";
       if (!checkCellOpen(startingX, startingY, endPosition, ship.getPosition()))
         return "position not open";
       for (let i = startingY; i <= endPosition; i++) {
@@ -108,10 +110,30 @@ const gameBoard = () => {
         const ship = board[i][j].contains;
         if (ship != null) {
           if (ship.getName() === name) {
+            let endPosition;
+            let startingX, startingY;
+            let tempPosition;
+            if (ship.getPosition() === "horizontal") tempPosition = "vertical";
+            else tempPosition = "horizontal";
+
+            if (tempPosition === "horizontal") {
+              endPosition = j + ship.getLength() - 1;
+              startingX = j + 1;
+              startingY = i;
+            } else {
+              endPosition = i + ship.getLength() - 1;
+              startingY = i + 1;
+              startingX = j;
+            }
+            if (!checkBoundary(startingX, startingY, endPosition, tempPosition))
+              return "out of bounds";
+            if (!checkCellOpen(startingX, startingY, endPosition, tempPosition))
+              return "position not open";
             removeShip(j, i, ship);
             ship.changePosition();
+
             placeShip(ship, [j, i]);
-            return;
+            return "ship turned";
           }
         }
       }

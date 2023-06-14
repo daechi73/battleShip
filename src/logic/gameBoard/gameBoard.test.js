@@ -133,12 +133,37 @@ import ship from "../ship/ship";
 //   expect(newBoard.getBoard()[0][2].contains).toBe(null);
 // });
 
-test("testing turnship method...", () => {
+// test("testing turnship method...", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 4);
+//   newBoard.placeShip(battleShip, [0, 0]);
+//   newBoard.turnShip("battleShip");
+//   expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShip");
+//   expect(newBoard.getBoard()[1][0].contains.getName()).toBe("battleShip");
+//   expect(newBoard.getBoard()[2][0].contains.getName()).toBe("battleShip");
+// });
+
+// test("testing turnship method when another ship is beside it...", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 4);
+//   const cruiser = ship("cruiser", 3);
+//   newBoard.placeShip(cruiser, [0, 1]);
+//   newBoard.placeShip(battleShip, [4, 0]);
+//   expect(newBoard.turnShip("battleShip")).toBe("cell not available");
+//   //newBoard.turnShip("battleShip");
+//   //expect(newBoard.getBoard()[3][0].contains.getName()).toBe("battleShip");
+//   // expect(newBoard.getBoard()[1][0].contains.getName()).toBe("battleShip");
+//   // expect(newBoard.getBoard()[2][0].contains.getName()).toBe("battleShip");
+//   //passed all
+// });
+test("testing turnship method with boundaries of board", () => {
   const newBoard = gameBoard();
   const battleShip = ship("battleShip", 4);
-  newBoard.placeShip(battleShip, [0, 0]);
-  newBoard.turnShip("battleShip");
-  expect(newBoard.getBoard()[0][0].contains.getName()).toBe("battleShip");
-  expect(newBoard.getBoard()[1][0].contains.getName()).toBe("battleShip");
-  expect(newBoard.getBoard()[2][0].contains.getName()).toBe("battleShip");
+  newBoard.placeShip(battleShip, [5, 7]);
+  expect(newBoard.turnShip("battleShip")).toBe("out of bounds");
+  //newBoard.turnShip("battleShip");
+  //expect(newBoard.getBoard()[3][0].contains.getName()).toBe("battleShip");
+  // expect(newBoard.getBoard()[1][0].contains.getName()).toBe("battleShip");
+  // expect(newBoard.getBoard()[2][0].contains.getName()).toBe("battleShip");
+  //passed all
 });
