@@ -1,10 +1,10 @@
 const positionUtility = () => {
-  const disableCell = (startingCell, draggedShip) => {
-    if (draggedShip.dataset.position === "horizontal") {
+  const disableCell = (startingCell, targetShip) => {
+    if (targetShip.dataset.position === "horizontal") {
       const disableFrom = startingCell.dataset.column;
       const disableTo =
         parseInt(startingCell.dataset.column) +
-        parseInt(draggedShip.dataset.length);
+        parseInt(targetShip.dataset.length);
 
       for (let i = disableFrom; i < disableTo; i++) {
         document.querySelector(
@@ -13,9 +13,9 @@ const positionUtility = () => {
       }
     }
 
-    if (draggedShip.dataset.position === "vertical") {
+    if (targetShip.dataset.position === "vertical") {
       const disableFrom = startingCell.dataset.row.charCodeAt(0);
-      const disableTo = disableFrom + parseInt(draggedShip.dataset.length);
+      const disableTo = disableFrom + parseInt(targetShip.dataset.length);
 
       for (let i = disableFrom; i < disableTo; i++) {
         document.querySelector(
@@ -27,12 +27,13 @@ const positionUtility = () => {
     }
   };
 
-  const enableCell = (startingCell, draggedShip) => {
-    if (draggedShip.dataset.position === "horizontal") {
+  const enableCell = (startingCell, targetShip) => {
+    console.log("enabling Cell....");
+    if (targetShip.dataset.position === "horizontal") {
       const enableFrom = startingCell.dataset.column;
       const enableTo =
         parseInt(startingCell.dataset.column) +
-        parseInt(draggedShip.dataset.length);
+        parseInt(targetShip.dataset.length);
 
       for (let i = enableFrom; i < enableTo; i++) {
         document.querySelector(
@@ -41,9 +42,9 @@ const positionUtility = () => {
       }
     }
 
-    if (draggedShip.dataset.position === "vertical") {
+    if (targetShip.dataset.position === "vertical") {
       const disableFrom = startingCell.dataset.row.charCodeAt(0);
-      const disableTo = disableFrom + parseInt(draggedShip.dataset.length);
+      const disableTo = disableFrom + parseInt(targetShip.dataset.length);
 
       for (let i = disableFrom; i < disableTo; i++) {
         document.querySelector(
@@ -55,15 +56,18 @@ const positionUtility = () => {
     }
   };
 
-  const checkCellAvailability = (startingCell, draggedShip) => {
+  const checkCellAvailability = (startingCell, targetShip, positionChange) => {
     if (startingCell.className === "shipSubset") {
       startingCell = startingCell.parentNode.parentNode;
     }
-    if (draggedShip.dataset.position === "horizontal") {
-      const checkFrom = startingCell.dataset.column;
+    if (targetShip.dataset.position === "horizontal") {
+      let checkFrom;
+      if (positionChange === true) {
+        checkFrom = startingCell.dataset.column + 1;
+      } else checkFrom = startingCell.dataset.column;
       const checkTo =
         parseInt(startingCell.dataset.column) +
-        parseInt(draggedShip.dataset.length);
+        parseInt(targetShip.dataset.length);
 
       for (let i = checkFrom; i < checkTo; i++) {
         if (
@@ -77,11 +81,12 @@ const positionUtility = () => {
       }
       return true;
     }
-    if (draggedShip.dataset.position === "vertical") {
-      console.log("verticalcheck");
-      console.log(startingCell);
-      const checkFrom = startingCell.dataset.row.charCodeAt(0);
-      const checkTo = checkFrom + parseInt(draggedShip.dataset.length);
+    if (targetShip.dataset.position === "vertical") {
+      let checkFrom;
+      if (positionChange === true)
+        checkFrom = startingCell.dataset.row.charCodeAt(0) + 1;
+      else checkFrom = startingCell.dataset.row.charCodeAt(0);
+      const checkTo = checkFrom + parseInt(targetShip.dataset.length) - 1;
 
       for (let i = checkFrom; i < checkTo; i++) {
         if (
@@ -99,17 +104,17 @@ const positionUtility = () => {
     }
   };
 
-  const checkBoundary = (startingCell, draggedShip) => {
+  const checkBoundary = (startingCell, targetShip) => {
     if (startingCell.className === "shipSubset") {
       startingCell = startingCell.parentNode.parentNode;
     }
     console.log("droping..");
-    //return console.log(draggedShip);
-    if (draggedShip.dataset.position === "horizontal") {
+    //return console.log(targetShip);
+    if (targetShip.dataset.position === "horizontal") {
       const checkFrom = startingCell.dataset.column;
       const checkTo =
         parseInt(startingCell.dataset.column) +
-        parseInt(draggedShip.dataset.length);
+        parseInt(targetShip.dataset.length);
 
       for (let i = checkFrom; i < checkTo; i++) {
         if (
@@ -123,12 +128,12 @@ const positionUtility = () => {
       }
       return true;
     }
-    if (draggedShip.dataset.position === "vertical") {
+    if (targetShip.dataset.position === "vertical") {
       console.log("vertical boundary check..");
       const checkFrom = startingCell.dataset.row.charCodeAt(0);
       const checkTo =
         startingCell.dataset.row.charCodeAt(0) +
-        parseInt(draggedShip.dataset.length);
+        parseInt(targetShip.dataset.length);
 
       for (let i = checkFrom; i < checkTo; i++) {
         if (
@@ -142,7 +147,7 @@ const positionUtility = () => {
           return false;
         }
       }
-      if (draggedShip.dataset.position === "") return "position not set";
+      if (targetShip.dataset.position === "") return "position not set";
       return true;
     }
   };
