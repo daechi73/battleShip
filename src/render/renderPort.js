@@ -10,7 +10,6 @@ const renderPort = (ships) => {
     const shipDock = document.createElement("div");
     const boat = renderShip(ship);
     shipDock.classList.add("dock");
-    shipDock.classList.add("droppable");
     shipDock.appendChild(boat);
     port.appendChild(shipDock);
   });
