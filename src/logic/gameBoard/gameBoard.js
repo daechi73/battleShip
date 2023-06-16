@@ -75,7 +75,7 @@ const gameBoard = () => {
       if (!checkCellOpen(startingX, startingY, endPosition, ship.getPosition()))
         return "position not open";
       for (let i = startingY; i <= endPosition; i++) {
-        board[i][startingY].contains = ship;
+        board[i][startingX].contains = ship;
       }
     }
   };
@@ -104,6 +104,7 @@ const gameBoard = () => {
       return `You've hit ${ship.getName()} at position [${coordination}]`;
     }
   };
+
   const turnShip = (name) => {
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
@@ -139,6 +140,7 @@ const gameBoard = () => {
       }
     }
   };
+
   const removeShip = (startingX, startingY, ship) => {
     if (ship.getPosition() === "horizontal") {
       const endPosition = startingX + ship.getLength() - 1;
@@ -153,12 +155,25 @@ const gameBoard = () => {
     }
   };
 
+  const printBoard = () => {
+    board.forEach((row) => {
+      let printRow = "";
+      row.forEach((column) => {
+        if (column.contains == null) printRow += ` c`;
+        else
+          printRow += ` ${column.contains.getName().charAt(0).toUpperCase()}`;
+      });
+      console.log(printRow);
+    });
+  };
+
   return {
     placeShip,
     getBoard,
     checkCellHit,
     receiveAttack,
     turnShip,
+    printBoard,
   };
 };
 
