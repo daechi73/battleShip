@@ -129,7 +129,6 @@ const positionUtility = () => {
       return true;
     }
     if (targetShip.dataset.position === "vertical") {
-      console.log("vertical boundary check..");
       const checkFrom = startingCell.dataset.row.charCodeAt(0);
       const checkTo =
         startingCell.dataset.row.charCodeAt(0) +
@@ -151,7 +150,20 @@ const positionUtility = () => {
       return true;
     }
   };
-  return { disableCell, enableCell, checkBoundary, checkCellAvailability };
+  const allShipsOnBoard = (ships) => {
+    for (const ship of ships) {
+      if (ship.getCoord() == null) return false;
+    }
+    return true;
+  };
+
+  return {
+    disableCell,
+    enableCell,
+    checkBoundary,
+    checkCellAvailability,
+    allShipsOnBoard,
+  };
 };
 
 export default positionUtility;
