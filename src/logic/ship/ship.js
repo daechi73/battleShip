@@ -1,4 +1,4 @@
-const ship = (name, length, position = "horizontal") => {
+const ship = (name, length, position = "horizontal", coord = null) => {
   let timesHit = 0;
   const hit = () => {
     timesHit++;
@@ -18,6 +18,12 @@ const ship = (name, length, position = "horizontal") => {
   const getPosition = () => {
     return position;
   };
+  const getCoord = () => {
+    return coord;
+  };
+  const setCoord = (coordination) => {
+    coord = coordination;
+  };
   const changePosition = () => {
     if (position === "horizontal") position = "vertical";
     else position = "horizontal";
@@ -31,6 +37,8 @@ const ship = (name, length, position = "horizontal") => {
     isSunk,
     getPosition,
     changePosition,
+    getCoord,
+    setCoord,
   };
 };
 
