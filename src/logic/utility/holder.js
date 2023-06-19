@@ -2,7 +2,6 @@ const dragEvent = () => {
   let dragged = null;
   let shipSubset = null;
 
-  const ships = document.querySelectorAll(".ship");
   const cells = document.querySelectorAll(".cell");
 
   const mouseDownEvent = (e) => {
@@ -14,6 +13,7 @@ const dragEvent = () => {
   const dragstartEvent = (e) => {
     console.log("dragstarting");
     console.log(e.target);
+    console.log("dragStartEventHappening");
     if (e.target.classList.contains("ship")) {
       if (e.target.parentNode.classList.contains("cell"))
         enableCell(e.target.parentNode, e.target);
@@ -33,84 +33,72 @@ const dragEvent = () => {
     if (checkBoundary(e.target, dragged)) {
       if (checkCellAvailability(e.target, dragged)) {
         if (e.target.classList.contains("droppable")) {
-          console.log("hereeeee");
-          console.log(dragged.parentNode);
+          let realCellToAppend;
+          if (dragged.dataset.position === "horizontal") {
+            realCellToAppend = document.querySelector(
+              `[data-column="${
+                e.target.dataset.column - (shipSubset - 1)
+              }"][data-row="${e.target.dataset.row}"]`
+            );
+          } else {
+            const newRow =
+              e.target.dataset.row.charCodeAt(0) - (shipSubset - 1);
+            realCellToAppend = document.querySelector(
+              `[data-column="${
+                e.target.dataset.column
+              }"][data-row="${String.fromCharCode(newRow)}"]`
+            );
+          }
           dragged.parentNode.removeChild(dragged);
-          const realCellToAppend = document.querySelector(
-            `[data-column="${
-              e.target.dataset.column - (shipSubset - 1)
-            }"][data-row="${e.target.dataset.row}"]`
-          );
           realCellToAppend.appendChild(dragged);
           disableCell(realCellToAppend, dragged);
         }
       }
     }
   };
+  const removeEvents = () => {
+    console.log("removing events..");
+    const ships = document.querySelectorAll(".ship");
+    ships.forEach((ship) => {
+      ship.removeEventListener("mousedown", mouseDownEvent);
 
-  ships.forEach((ship) => {
-    ship.addEventListener("mousedown", mouseDownEvent);
+      ship.removeEventListener("dragstart", dragstartEvent);
 
-    ship.addEventListener("dragstart", dragstartEvent);
+      ship.removeEventListener("dragend", dragendEvent);
+    });
 
-    ship.addEventListener("dragend", dragendEvent);
-  });
+    cells.forEach((cell) => {
+      cell.removeEventListener("dragover", dragoverEvent);
+    });
+    cells.forEach((cell) => {
+      cell.removeEventListener("drop", dropEvent);
+    });
+  };
+  const addEvents = () => {
+    const ships = document.querySelectorAll(".ship");
+    console.log("addingEvents...");
+    ships.forEach((ship) => {
+      ship.addEventListener("mousedown", mouseDownEvent);
 
-  cells.forEach((cell) => {
-    cell.addEventListener("dragover", dragoverEvent);
-  });
-  cells.forEach((cell) => {
-    cell.addEventListener("drop", dropEvent);
-  });
+      ship.addEventListener("dragstart", dragstartEvent);
 
-  const btn = document.createElement("button");
-  btn.textContent = "btn";
-  btn.onclick = removeDragEvents;
-  document.body.appendChild(btn);
+      ship.addEventListener("dragend", dragendEvent);
+    });
+
+    cells.forEach((cell) => {
+      cell.addEventListener("dragover", dragoverEvent);
+    });
+    cells.forEach((cell) => {
+      cell.addEventListener("drop", dropEvent);
+    });
+  };
+  const recallDragEvents = () => {
+    removeEvents();
+    addEvents();
+  };
+
+  return { addEvents, recallDragEvents };
 };
-
-// ship.addEventListener("mousedown", (e) => {
-//   if (e.target.classList.contains("shipSubset")) {
-//     shipSubset = e.target.dataset.subset;
-//     console.log(e.target);
-//   }
-// });
-
-// ship.addEventListener("dragstart", (e) => {
-//   console.log("dragstarting");
-//   console.log(e.target);
-//   if (e.target.classList.contains("ship")) {
-//     if (e.target.parentNode.classList.contains("cell"))
-//       enableCell(e.target.parentNode, e.target);
-//     dragged = e.target;
-//   }
-// });
-
-// ship.addEventListener("dragend", (e) => {
-//   return "drag ending";
-// });
-
-// const removeDragEvents = () => {
-//   ships.forEach((ship) => {
-//     ship.removeEventListener("mousedown", mouseDownEvent);
-
-//     ship.removeEventListener("dragstart", dragstartEvent);
-
-//     ship.removeEventListener("dragend", dragendEvent);
-//   });
-
-//   cells.forEach((cell) => {
-//     cell.removeEventListener("dragover", dragoverEvent);
-//   });
-//   cells.forEach((cell) => {
-//     cell.removeEventListener("drop", dropEvent);
-//   });
-// };
-
-// const btn = document.createElement("button");
-// btn.textContent = "btn";
-// btn.onclick = removeDragEvents;
-// document.body.appendChild(btn);
 
 const disableCell = (startingCell, draggedShip) => {
   if (draggedShip.dataset.position === "horizontal") {
@@ -237,6 +225,7 @@ const checkBoundary = (startingCell, draggedShip) => {
     return true;
   }
   if (draggedShip.dataset.position === "vertical") {
+    console.log("vertical boundary check..");
     const checkFrom = startingCell.dataset.row.charCodeAt(0);
     const checkTo =
       startingCell.dataset.row.charCodeAt(0) +
@@ -259,23 +248,4 @@ const checkBoundary = (startingCell, draggedShip) => {
   }
 };
 
-const removeDragEvents = () => {
-  console.log("removing..");
-
-  ships.forEach((ship) => {
-    ship.removeEventListener("mousedown", mouseDownEvent);
-
-    ship.removeEventListener("dragstart", dragstartEvent);
-
-    ship.removeEventListener("dragend", dragendEvent);
-  });
-
-  cells.forEach((cell) => {
-    cell.removeEventListener("dragover", dragoverEvent);
-  });
-  cells.forEach((cell) => {
-    cell.removeEventListener("drop", dropEvent);
-  });
-};
-
-export { dragEvent, removeDragEvents };
+export default dragEvent;
