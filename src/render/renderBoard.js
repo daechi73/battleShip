@@ -10,7 +10,7 @@ const renderBoard = (board) => {
       const cell = document.createElement("div");
       cell.dataset.column = `${column.column}`;
       cell.dataset.row = `${column.row}`;
-      cell.dataset.coord = `${column.charCode}`;
+      cell.dataset.charCode = `${column.charCode}`;
       cell.dataset.available = true;
       // cell.classList.add(`${column.column}`);
       // cell.classList.add(`${column.charCode}`);
