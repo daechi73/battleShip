@@ -1,6 +1,6 @@
 import positionUtility from "./positionUtility";
 
-const dragEvent = () => {
+const dragEvent = (board) => {
   let dragged = null;
   let shipSubset = null;
 
@@ -12,10 +12,10 @@ const dragEvent = () => {
       console.log(e.target);
     }
   };
+
   const dragstartEvent = (e) => {
     console.log("dragstarting");
     console.log(e.target);
-    console.log("dragStartEventHappening");
     if (e.target.classList.contains("ship")) {
       if (e.target.parentNode.classList.contains("cell"))
         positionUtility().enableCell(e.target.parentNode, e.target);
@@ -53,7 +53,17 @@ const dragEvent = () => {
           }
           dragged.parentNode.removeChild(dragged);
           realCellToAppend.appendChild(dragged);
+          //console.log(realCellToAppend.dataset.charCode);
+          //console.log(dragged.id);
+          console.log("heree");
+          board.placeShip(
+            board.findShip(dragged.id),
+            realCellToAppend.dataset.charCode
+          );
+          board.printBoard();
           positionUtility().disableCell(realCellToAppend, dragged);
+          if (positionUtility().allShipsOnBoard(board.getShips()) == true)
+            console.log("allShipOnBoard");
         }
       }
     }
@@ -98,8 +108,10 @@ const dragEvent = () => {
     removeEvents();
     addEvents();
   };
-
-  return { addEvents, recallDragEvents };
+  const getDropCount = () => {
+    dropCount++;
+  };
+  return { addEvents, recallDragEvents, getDropCount };
 };
 
 export default dragEvent;
