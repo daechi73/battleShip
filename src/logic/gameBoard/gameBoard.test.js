@@ -178,12 +178,24 @@ import ship from "../ship/ship";
 //   //passed
 // });
 
-test("testing placeship when it is already on board...", () => {
+// test("testing placeship when it is already on board...", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 5);
+//   const cruiser = ship("cruiser", 3, "vertical");
+//   newBoard.placeShip(cruiser, [0, 1]);
+//   newBoard.placeShip(battleShip, [0, 0]);
+//   newBoard.placeShip(battleShip, [1, 1]);
+//   newBoard.printBoard();
+//   //passed
+// });
+
+test("testing ship placement at the last column as vertical..", () => {
   const newBoard = gameBoard();
   const battleShip = ship("battleShip", 5);
   const cruiser = ship("cruiser", 3, "vertical");
   newBoard.placeShip(cruiser, [0, 1]);
   newBoard.placeShip(battleShip, [0, 0]);
   newBoard.placeShip(battleShip, [1, 1]);
+  newBoard.placeShip(cruiser, [9, 0]);
   newBoard.printBoard();
 });

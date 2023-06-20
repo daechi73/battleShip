@@ -73,7 +73,9 @@ const gameBoard = () => {
       const [prevX, prevY] = ship.getCoord();
       removeShip(prevX, prevY, ship);
     }
+    console.log(startingPosition + "startingPosition");
     startingPosition = alphaNumCoordToNumCoord(startingPosition);
+    console.log(startingPosition);
     const [startingX, startingY] = startingPosition;
     ship.setCoord(startingPosition);
     if (ship.getPosition() === "horizontal") {
@@ -99,9 +101,13 @@ const gameBoard = () => {
   const alphaNumCoordToNumCoord = (alphaNumCoord) => {
     //console.log(typeof alphaNumCoord);
     if (typeof alphaNumCoord === "string") {
-      const coordArray = alphaNumCoord.split("");
-      const y = coordArray[0].charCodeAt(0) - 65;
-      alphaNumCoord = [coordArray[1] - 1, y];
+      const x = alphaNumCoord.match(/[0-9]+/g)[0] - 1;
+      const y = alphaNumCoord.match(/[a-zA-Z]/g)[0].charCodeAt(0) - 65;
+      console.log(x);
+      console.log(y);
+      //console.log("here " + coordArray[0]);
+      // const y = coordArray[0].charCodeAt(0) - 65;
+      alphaNumCoord = [x, y];
     }
     return alphaNumCoord;
   };
