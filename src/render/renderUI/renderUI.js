@@ -7,7 +7,7 @@ const renderUI = (player1Board, player2Board) => {
   renderPlayer1Side(player1Board);
   renderPort(player1Board.getShips());
   const dragEventActivate = dragEvent(player1Board, player2Board);
-  dragEventActivate.addEvents();
+  dragEventActivate.addEvents(dragEventActivate);
   changePositionListener(player1Board, dragEventActivate);
 };
 
