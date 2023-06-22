@@ -1,6 +1,7 @@
 import positionUtility from "./positionUtility";
+import renderGameStartBtn from "../../render/renderUI/renderGameStartBtn";
 
-const dragEvent = (board) => {
+const dragEvent = (player1Board, player2Board) => {
   let dragged = null;
   let shipSubset = null;
 
@@ -53,17 +54,19 @@ const dragEvent = (board) => {
           }
           dragged.parentNode.removeChild(dragged);
           realCellToAppend.appendChild(dragged);
-          //console.log(realCellToAppend.dataset.charCode);
-          //console.log(dragged.id);
-          console.log("heree");
-          board.placeShip(
-            board.findShip(dragged.id),
-            realCellToAppend.dataset.charCode
+
+          player1Board.placeShip(
+            player1Board.findShip(dragged.id),
+            realCellToAppend.dataset.alphanumcoord
           );
-          board.printBoard();
+          player1Board.printBoard();
           positionUtility().disableCell(realCellToAppend, dragged);
-          if (positionUtility().allShipsOnBoard(board.getShips()) == true)
+          if (
+            positionUtility().allShipsOnBoard(player1Board.getShips()) == true
+          ) {
             console.log("allShipOnBoard");
+            renderGameStartBtn(player2Board);
+          }
         }
       }
     }
