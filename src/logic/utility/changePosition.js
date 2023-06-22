@@ -1,4 +1,4 @@
-import renderShip from "../../render/renderShip";
+import renderShip from "../../render/renderUI/renderShip";
 import positionUtility from "./positionUtility";
 
 const changePositionListener = (board, dragEventObject) => {
