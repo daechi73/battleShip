@@ -189,13 +189,17 @@ import ship from "../ship/ship";
 //   //passed
 // });
 
-test("testing ship placement at the last column as vertical..", () => {
-  const newBoard = gameBoard();
-  const battleShip = ship("battleShip", 5);
-  const cruiser = ship("cruiser", 3, "vertical");
-  newBoard.placeShip(cruiser, [0, 1]);
-  newBoard.placeShip(battleShip, [0, 0]);
-  newBoard.placeShip(battleShip, [1, 1]);
-  newBoard.placeShip(cruiser, [9, 0]);
-  newBoard.printBoard();
+// test("testing ship placement at the last column as vertical..", () => {
+//   const newBoard = gameBoard();
+//   const battleShip = ship("battleShip", 5);
+//   const cruiser = ship("cruiser", 3, "vertical");
+//   newBoard.placeShip(cruiser, [0, 1]);
+//   newBoard.placeShip(battleShip, [0, 0]);
+//   newBoard.placeShip(battleShip, [1, 1]);
+//   newBoard.placeShip(cruiser, [9, 0]);
+//   newBoard.printBoard();
+// });
+
+test("testing numCoordToAlphaNumCoord method..", () => {
+  expect(gameBoard({ id: 0 }).numCoordToAlphaNumCoord([0, 0])).toBe("ja");
 });
