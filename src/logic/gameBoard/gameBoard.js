@@ -9,13 +9,14 @@ const cell = (row, column) => {
     hit: false,
   };
 };
-const gameBoard = () => {
-  const carrier = ship("carrier", 5);
-  const battleShip = ship("battleShip", 4);
-  const cruiser = ship("cruiser", 3);
-  const submarine = ship("submarine", 3);
-  const destroyer = ship("destroyer", 2);
-  const scout = ship("fishingBoat", 2, "vertical");
+const gameBoard = (id) => {
+  id.id++;
+  const carrier = ship("carrier" + `${id.id}`, 5);
+  const battleShip = ship("battleShip" + `${id.id}`, 4);
+  const cruiser = ship("reaper" + `${id.id}`, 3);
+  const submarine = ship("submarine" + `${id.id}`, 3);
+  const destroyer = ship("destroyer" + `${id.id}`, 2);
+  const scout = ship("fishingBoat" + `${id.id}`, 2);
   const ships = [carrier, battleShip, cruiser, submarine, destroyer, scout];
 
   const board = [];
@@ -73,11 +74,11 @@ const gameBoard = () => {
       const [prevX, prevY] = ship.getCoord();
       removeShip(prevX, prevY, ship);
     }
-    console.log(startingPosition + "startingPosition");
+    //console.log(startingPosition + "startingPosition");
     startingPosition = alphaNumCoordToNumCoord(startingPosition);
-    console.log(startingPosition);
+    // console.log(startingPosition);
     const [startingX, startingY] = startingPosition;
-    ship.setCoord(startingPosition);
+
     if (ship.getPosition() === "horizontal") {
       const endPosition = startingX + ship.getLength() - 1;
       if (!checkBoundary(startingX, startingY, endPosition, ship.getPosition()))
@@ -87,6 +88,7 @@ const gameBoard = () => {
       for (let i = startingX; i <= endPosition; i++) {
         board[startingY][i].contains = ship;
       }
+      ship.setCoord(startingPosition);
     } else {
       const endPosition = startingY + ship.getLength() - 1;
       if (!checkBoundary(startingX, startingY, endPosition, ship.getPosition()))
@@ -96,22 +98,26 @@ const gameBoard = () => {
       for (let i = startingY; i <= endPosition; i++) {
         board[i][startingX].contains = ship;
       }
+      ship.setCoord(startingPosition);
     }
   };
   const alphaNumCoordToNumCoord = (alphaNumCoord) => {
-    //console.log(typeof alphaNumCoord);
     if (typeof alphaNumCoord === "string") {
       const x = alphaNumCoord.match(/[0-9]+/g)[0] - 1;
       const y = alphaNumCoord.match(/[a-zA-Z]/g)[0].charCodeAt(0) - 65;
-      console.log(x);
-      console.log(y);
-      //console.log("here " + coordArray[0]);
-      // const y = coordArray[0].charCodeAt(0) - 65;
+      // console.log(x);
+      // console.log(y);
+
       alphaNumCoord = [x, y];
     }
     return alphaNumCoord;
   };
 
+  const numCoordToAlphaNumCoord = (numCoord) => {
+    const x = numCoord[0] + 1;
+    const y = String.fromCharCode(numCoord[1] + 65);
+    return y + x;
+  };
   const getBoard = () => {
     return board;
   };
@@ -218,6 +224,7 @@ const gameBoard = () => {
     printBoard,
     getShips,
     findShip,
+    numCoordToAlphaNumCoord,
   };
 };
 
