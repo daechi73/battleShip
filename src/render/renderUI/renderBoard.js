@@ -1,6 +1,6 @@
 import renderShip from "./renderShip";
 
-const renderBoard = (board, shipsOnBoard) => {
+const renderBoard = (board) => {
   const containerBoard = document.createElement("div");
   containerBoard.classList.add("container-Board");
 
@@ -22,7 +22,7 @@ const renderBoard = (board, shipsOnBoard) => {
     });
     containerBoard.appendChild(r);
   });
-  //if (shipsOnBoard) renderShipsToBoard(board);
+
   return containerBoard;
 };
 
