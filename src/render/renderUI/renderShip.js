@@ -13,13 +13,13 @@ const renderShip = (ship) => {
       //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
       shipSubset.style.cssText = `
         height:35px;
-        width:36.5px;
+        width:36px;
       `;
       boat.appendChild(shipSubset);
     }
 
     boat.classList.add("horizontal");
-    boat.style.width = `${ship.getLength() * 36.5}px`;
+    boat.style.width = `${ship.getLength() * 36}px`;
     boat.style.height = "35px";
     //boat.innerHTML = `<div class="shipName">${ship.getName()}</div>`;
     //boat.textContent = `${ship.getName()}`;
