@@ -3,11 +3,20 @@ import positionUtility from "./positionUtility";
 
 const changePositionListener = (board, dragEventObject) => {
   const shipSubsets = document.querySelectorAll(".shipSubset");
-  shipSubsets.forEach((shipSubset) => {
-    shipSubset.addEventListener("click", (e) => {
-      changePosition(board, e, dragEventObject);
+  const changePositionFuncHolder = (e) => {
+    changePosition(board, e, dragEventObject);
+  };
+  const addEvents = (() => {
+    shipSubsets.forEach((shipSubset) => {
+      shipSubset.addEventListener("click", changePositionFuncHolder);
     });
-  });
+  })();
+  const removeEvents = () => {
+    shipSubsets.forEach((shipSubset) => {
+      shipSubset.removeEventListener("click", changePositionFuncHolder);
+    });
+  };
+  return { removeEvents };
 };
 const changePosition = (board, e, dragEventObject) => {
   const shipContainer = e.target.parentNode.parentNode;

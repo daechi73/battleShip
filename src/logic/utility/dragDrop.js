@@ -1,10 +1,11 @@
 import positionUtility from "./positionUtility";
 import renderGameStartBtn from "../../render/renderUI/renderGameStartBtn";
 
-const dragEvent = (player1Board, player2Board) => {
+const dragEvent = (player1Board, player2Board, player1, player2) => {
   let dragged = null;
   let shipSubset = null;
   let dragEventObj;
+  let changePositionObj;
   const cells = document.querySelectorAll(".cell");
 
   const mouseDownEvent = (e) => {
@@ -65,7 +66,13 @@ const dragEvent = (player1Board, player2Board) => {
             positionUtility().allShipsOnBoard(player1Board.getShips()) == true
           ) {
             console.log("allShipOnBoard");
-            renderGameStartBtn(player2Board, dragEventObj);
+            renderGameStartBtn(
+              player2Board,
+              dragEventObj,
+              changePositionObj,
+              player1,
+              player2
+            );
           }
         }
       }
@@ -89,9 +96,10 @@ const dragEvent = (player1Board, player2Board) => {
       cell.removeEventListener("drop", dropEvent);
     });
   };
-  const addEvents = (dragEventObject) => {
+  const addEvents = (dragEventObject, changePositionObject) => {
     const ships = document.querySelectorAll(".ship");
     dragEventObj = dragEventObject;
+    changePositionObj = changePositionObject;
     console.log("addingEvents...");
     ships.forEach((ship) => {
       ship.addEventListener("mousedown", mouseDownEvent);

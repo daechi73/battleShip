@@ -1,5 +1,11 @@
 import gameStartBtnEventListener from "../../logic/utility/gameStartBtnEventListener";
-const renderGameStartBtn = (player2Board, dragEventObject) => {
+const renderGameStartBtn = (
+  player2Board,
+  dragEventObject,
+  changePositionObj,
+  player1,
+  player2
+) => {
   if (document.querySelector(".port")) {
     document.querySelector(".port").remove();
 
@@ -7,7 +13,12 @@ const renderGameStartBtn = (player2Board, dragEventObject) => {
     gameStartBtn.textContent = "Game Start";
     gameStartBtn.classList.add("gameStartBtn");
     document.querySelector(".container-port").appendChild(gameStartBtn);
-    gameStartBtnEventListener(gameStartBtn, player2Board, dragEventObject);
+    gameStartBtnEventListener(
+      gameStartBtn,
+      player2Board,
+      dragEventObject,
+      changePositionObj
+    );
   }
 };
 

@@ -7,10 +7,10 @@ import shipId from "../utility/shipId.js";
 const choosingUI = (playerName) => {
   const id = shipId();
 
-  const player1Board = gameBoard(id);
-  const player2Board = gameBoard(id);
   const player1 = player(playerName);
   const player2 = computer();
+  const player1Board = gameBoard(id);
+  const player2Board = gameBoard(id);
 
   deleteThisafter(player1Board);
 
