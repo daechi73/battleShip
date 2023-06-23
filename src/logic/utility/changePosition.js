@@ -13,20 +13,17 @@ const changePosition = (board, e, dragEventObject) => {
   const shipContainer = e.target.parentNode.parentNode;
   console.log(e.target.parentNode.parentNode);
   if (shipContainer.classList.contains("dock")) {
-    const ship = board.findShip(e.target.parentNode.id);
-
-    ship.changePosition();
-    e.target.parentNode.remove();
-    const newShip = renderShip(ship);
-    shipContainer.appendChild(newShip);
-
-    dragEventObject.recallDragEvents();
-
-    newShip.childNodes.forEach((child) => {
-      child.addEventListener("click", (event) => {
-        changePosition(board, event, dragEventObject);
-      });
-    });
+    // const ship = board.findShip(e.target.parentNode.id);
+    // ship.changePosition();
+    // e.target.parentNode.remove();
+    // const newShip = renderShip(ship);
+    // shipContainer.appendChild(newShip);
+    // dragEventObject.recallDragEvents();
+    // newShip.childNodes.forEach((child) => {
+    //   child.addEventListener("click", (event) => {
+    //     changePosition(board, event, dragEventObject);
+    //   });
+    // });
   }
   if (shipContainer.classList.contains("cell")) {
     const ship = board.findShip(e.target.parentNode.id);
