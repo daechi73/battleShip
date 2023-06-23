@@ -1,5 +1,4 @@
-import { renderPlayer2Side } from "./renderPlayerSides";
-import autoPcBoard from "../../logic/utility/autoPcBoard";
+import gameStartBtnEventListener from "../../logic/utility/gameStartBtnEventListener";
 const renderGameStartBtn = (player2Board, dragEventObject) => {
   if (document.querySelector(".port")) {
     document.querySelector(".port").remove();
@@ -11,16 +10,5 @@ const renderGameStartBtn = (player2Board, dragEventObject) => {
     gameStartBtnEventListener(gameStartBtn, player2Board, dragEventObject);
   }
 };
-const gameStartBtnEventListener = (
-  gameStartBtn,
-  player2Board,
-  dragEventObject
-) => {
-  gameStartBtn.addEventListener("click", () => {
-    document.querySelector(".container-port").remove();
-    autoPcBoard(player2Board);
-    renderPlayer2Side(player2Board);
-    dragEventObject.removeEvents();
-  });
-};
+
 export default renderGameStartBtn;
