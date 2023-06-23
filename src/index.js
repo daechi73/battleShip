@@ -1,6 +1,6 @@
 import renderStart from "./render/renderStartPage.js";
-import playGame from "./logic/playGame/playGame.js";
+import choosingUI from "./logic/choosingUI/choosingUI.js";
 
 //renderStart();
 
-playGame("j");
+choosingUI("j");
