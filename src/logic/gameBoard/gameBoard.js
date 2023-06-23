@@ -215,6 +215,34 @@ const gameBoard = (id) => {
     }
   };
 
+  const autoPcBoard = () => {
+    const randomVHPosition = (x, ship) => {
+      if (x % 2 === 0) ship.changePosition();
+    };
+    for (const ship of ships) {
+      do {
+        const x = Math.floor(Math.random() * 10);
+        const y = Math.floor(Math.random() * 10);
+        randomVHPosition(x, ship);
+        //   console.log(
+        //     [x, y] +
+        //       " " +
+        //       ship.getPosition() +
+        //       " " +
+        //       ship.getCoord() +
+        //       " " +
+        //       ship.getName()
+        //   );
+        placeShip(ship, [x, y]);
+        if (ship.getCoord != null) {
+          // console.log("shipPlaced");
+          // console.log(`${ship.getCoord()}`);
+        }
+      } while (ship.getCoord() == null);
+    }
+    printBoard();
+  };
+
   return {
     placeShip,
     getBoard,
@@ -225,6 +253,7 @@ const gameBoard = (id) => {
     getShips,
     findShip,
     numCoordToAlphaNumCoord,
+    autoPcBoard,
   };
 };
 
