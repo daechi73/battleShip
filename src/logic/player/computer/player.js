@@ -1,6 +1,6 @@
 const player = (name) => {
   const makeMove = (board, coord) => {
-    if (board.checkCellHit(coord) === false) {
+    if (board.checkCellAttacked(coord) === false) {
       return board.receiveAttack(coord);
     }
   };
