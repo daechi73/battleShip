@@ -1,4 +1,6 @@
 import gameStartBtnEventListener from "../../logic/utility/gameStartBtnEventListener";
+import cellRecieveAttackListener from "../../logic/utility/cellRecieveAttack";
+
 const renderGameStartBtn = (
   player2Board,
   dragEventObject,
@@ -17,7 +19,9 @@ const renderGameStartBtn = (
       gameStartBtn,
       player2Board,
       dragEventObject,
-      changePositionObj
+      changePositionObj,
+      player1,
+      player2
     );
   }
 };
