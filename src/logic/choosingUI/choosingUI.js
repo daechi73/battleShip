@@ -14,7 +14,7 @@ const choosingUI = (playerName) => {
 
   deleteThisafter(player1Board);
 
-  renderUI(player1Board, player2Board);
+  renderUI(player1Board, player2Board, player1, player2);
 };
 
 const deleteThisafter = (player1Board) => {
