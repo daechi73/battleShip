@@ -19,9 +19,10 @@ body {
 .container-player2 {
   width: 50%;
 }
-/* .container-player2 .ship {
-  display: none;  
-} */
+.container-player2 .ship {
+  display: none;
+  opacity: 0.5;
+}
 .row {
   display: flex;
 }
@@ -32,6 +33,9 @@ body {
   width: 35px;
   padding: 0;
   margin: 0;
+  font-size: 30px;
+  text-align: center;
+  line-height: 30px;
 }
 
 .container-port {
