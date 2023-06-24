@@ -7,6 +7,7 @@ const cell = (row, column) => {
     charCode: row + "" + column,
     contains: null,
     hit: false,
+    missed: false,
   };
 };
 const gameBoard = (id) => {
@@ -63,9 +64,9 @@ const gameBoard = (id) => {
     }
     return true;
   };
-  const checkCellHit = (coord) => {
+  const checkCellAttacked = (coord) => {
     let [x, y] = coord;
-    if (board[y][x].hit === true) return true;
+    if (board[y][x].hit === true || board[y][x].missed === true) return true;
     return false;
   };
 
@@ -125,8 +126,9 @@ const gameBoard = (id) => {
   const receiveAttack = (coordination) => {
     let [x, y] = coordination;
     if (board[y][x].contains == null) {
-      board[y][x].hit = true;
-      return `you've missed at position [${coordination}]`;
+      board[y][x].missed = true;
+      //return `you've missed at position [${coordination}]`;
+      return false;
     } else {
       const ship = board[y][x].contains;
       ship.hit();
@@ -134,13 +136,34 @@ const gameBoard = (id) => {
       if (ship.isSunk()) {
         numberOfSunkenShip++;
         if (numberOfSunkenShip === 6)
-          return `
-          You've hit ${ship.getName()} at position [${coordination}]
-          you've sunk a ${ship.getName()}!
-          You've sunken all the ships`;
-        return `you've sunk a ${ship.getName()}!`;
+          // return `
+          // You've hit ${ship.getName()} at position [${coordination}]
+          // you've sunk a ${ship.getName()}!
+          // You've sunken all the ships`;
+          return {
+            shipHit: true,
+            shipName: ship.getName(),
+            shipSunk: true,
+            sunkAllShips: true,
+            coordination: numCoordToAlphaNumCoord(coordination),
+          };
+        // return `you've sunk a ${ship.getName()}!`;
+        return {
+          shipHit: true,
+          shipName: ship.getName(),
+          shipSunk: true,
+          sunkAllShips: false,
+          coordination: numCoordToAlphaNumCoord(coordination),
+        };
       }
-      return `You've hit ${ship.getName()} at position [${coordination}]`;
+      //return `You've hit ${ship.getName()} at position [${coordination}]`;
+      return {
+        shipHit: true,
+        shipName: ship.getName(),
+        shipSunk: false,
+        sunkAllShips: false,
+        coordination: numCoordToAlphaNumCoord(coordination),
+      };
     }
   };
 
@@ -198,7 +221,10 @@ const gameBoard = (id) => {
     board.forEach((row) => {
       let printRow = "";
       row.forEach((column) => {
-        if (column.contains == null) printRow += ` o`;
+        if (column.contains == null) {
+          if (column.missed === false) printRow += ` o`;
+          else printRow += ` x`;
+        } else if (column.hit === true) printRow += ` H`;
         else
           printRow += ` ${column.contains.getName().charAt(0).toUpperCase()}`;
       });
@@ -246,7 +272,7 @@ const gameBoard = (id) => {
   return {
     placeShip,
     getBoard,
-    checkCellHit,
+    checkCellAttacked,
     receiveAttack,
     turnShip,
     printBoard,
@@ -254,6 +280,7 @@ const gameBoard = (id) => {
     findShip,
     numCoordToAlphaNumCoord,
     autoPcBoard,
+    alphaNumCoordToNumCoord,
   };
 };
 
