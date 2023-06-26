@@ -1,5 +1,3 @@
-import renderShip from "./renderShip";
-
 const renderBoard = (board) => {
   const containerBoard = document.createElement("div");
   containerBoard.classList.add("container-Board");
@@ -27,17 +25,32 @@ const renderBoard = (board) => {
 };
 
 const renderShipsToBoard = (board) => {
-  board.getShips().forEach((ship) => {
-    const alphaNumCoord = board.numCoordToAlphaNumCoord(ship.getCoord());
-    //console.log(alphaNumCoord);
-    const frontCell = document.querySelector(
-      `.container-player2 [data-alphanumcoord='${alphaNumCoord}']`
-    );
-    //[data-alphanumcoord='${alphaNumCoord}']
-    console.log("renderShipsToBoard");
-    console.log(frontCell);
-    //console.log(board.numCoordToAlphaNumCoord(ship.getCoord()));
-    frontCell.appendChild(renderShip(ship));
+  // board.getShips().forEach((ship) => {
+  //   const alphaNumCoord = board.numCoordToAlphaNumCoord(ship.getCoord());
+  //   //console.log(alphaNumCoord);
+  //   const frontCell = document.querySelector(
+  //     `.container-player2 [data-alphanumcoord='${alphaNumCoord}']`
+  //   );
+  //   //[data-alphanumcoord='${alphaNumCoord}']
+  //   console.log("renderShipsToBoard");
+  //   console.log(frontCell);
+  //   //console.log(board.numCoordToAlphaNumCoord(ship.getCoord()));
+  //   frontCell.appendChild(renderShip(ship));
+  // });
+  board.getBoard().forEach((row) => {
+    row.forEach((column) => {
+      if (column.contains) {
+        const frontCell = document.querySelector(
+          `.container-player1 [data-alphanumcoord='${column.charCode}']`
+        );
+        //console.log(frontCell);
+        frontCell.style.backgroundColor = "aquamarine";
+        frontCell.textContent = `${column.contains
+          .getName()
+          .charAt(0)
+          .toUpperCase()}`;
+      }
+    });
   });
 };
 
