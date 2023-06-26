@@ -1,7 +1,7 @@
 import gameStartBtnEventListener from "../../logic/utility/gameStartBtnEventListener";
-import cellRecieveAttackListener from "../../logic/utility/cellRecieveAttack";
 
 const renderGameStartBtn = (
+  player1Board,
   player2Board,
   dragEventObject,
   changePositionObj,
@@ -17,6 +17,7 @@ const renderGameStartBtn = (
     document.querySelector(".container-port").appendChild(gameStartBtn);
     gameStartBtnEventListener(
       gameStartBtn,
+      player1Board,
       player2Board,
       dragEventObject,
       changePositionObj,

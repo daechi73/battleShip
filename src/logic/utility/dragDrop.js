@@ -67,6 +67,7 @@ const dragEvent = (player1Board, player2Board, player1, player2) => {
           ) {
             console.log("allShipOnBoard");
             renderGameStartBtn(
+              player1Board,
               player2Board,
               dragEventObj,
               changePositionObj,
