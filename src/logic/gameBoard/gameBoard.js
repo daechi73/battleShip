@@ -142,7 +142,7 @@ const gameBoard = (id) => {
           // You've sunken all the ships`;
           return {
             shipHit: true,
-            shipName: ship.getName(),
+            ship: ship,
             shipSunk: true,
             sunkAllShips: true,
             coordination: numCoordToAlphaNumCoord(coordination),
@@ -150,7 +150,7 @@ const gameBoard = (id) => {
         // return `you've sunk a ${ship.getName()}!`;
         return {
           shipHit: true,
-          shipName: ship.getName(),
+          ship: ship,
           shipSunk: true,
           sunkAllShips: false,
           coordination: numCoordToAlphaNumCoord(coordination),
@@ -159,7 +159,7 @@ const gameBoard = (id) => {
       //return `You've hit ${ship.getName()} at position [${coordination}]`;
       return {
         shipHit: true,
-        shipName: ship.getName(),
+        ship: ship,
         shipSunk: false,
         sunkAllShips: false,
         coordination: numCoordToAlphaNumCoord(coordination),
