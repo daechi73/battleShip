@@ -1,6 +1,6 @@
 import renderStart from "./render/renderStartPage.js";
-import choosingUI from "./logic/choosingUI/choosingUI.js";
+import UI from "./logic/UI/UI.js";
 
 //renderStart();
 
-choosingUI("j");
+UI("j");

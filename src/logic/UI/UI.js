@@ -4,7 +4,7 @@ import computer from "../player/computer/computer";
 import renderUI from "../../render/renderUI/renderUI";
 import shipId from "../utility/shipId.js";
 
-const choosingUI = (playerName) => {
+const UI = (playerName) => {
   const id = shipId();
 
   const player1 = player(playerName);
@@ -23,4 +23,4 @@ const deleteThisafter = (player1Board) => {
   });
 };
 
-export default choosingUI;
+export default UI;

@@ -1,4 +1,4 @@
-import choosingUI from "../logic/choosingUI/choosingUI.js";
+import UI from "../logic/UI/UI.js";
 
 const renderStart = () => {
   const startPage = document.createElement("div");
@@ -29,7 +29,7 @@ const renderStart = () => {
   startBtn.addEventListener("click", () => {
     if (input.value !== "") {
       startPage.style.display = "none";
-      choosingUI(input.value);
+      UI(input.value);
     } else {
       systemMsg.textContent = "Please enter your game name";
     }
