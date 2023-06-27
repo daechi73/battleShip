@@ -47,9 +47,9 @@ const changePosition = (board, e, dragEventObject) => {
         e.target.parentNode.remove();
         shipContainer.appendChild(newShip);
         positionUtility().disableCell(shipContainer, newShip);
-      } else ship.changePosition;
-    } else ship.changePosition();
-
+      }
+    }
+    //console.log(dragEventObject);
     dragEventObject.recallDragEvents();
 
     newShip.childNodes.forEach((child) => {
