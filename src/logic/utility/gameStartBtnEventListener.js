@@ -18,7 +18,7 @@ const gameStartBtnEventListener = (
     renderPlayer2Side(player2Board);
     dragEventObject.removeEvents();
     changePositionObject.removeEvents();
-    playRound(player2Board, player1);
+    playRound(player1Board, player2Board, player1, player2);
     renderShipsToBoard(player1Board);
   });
 };
