@@ -3,6 +3,7 @@ import player from "../player/computer/player";
 import computer from "../player/computer/computer";
 import renderUI from "../../render/renderUI/renderUI";
 import shipId from "../utility/shipId.js";
+import gameOverUI from "./gameOverUI";
 
 const UI = (playerName) => {
   const id = shipId();
@@ -12,8 +13,8 @@ const UI = (playerName) => {
   const player1Board = gameBoard(id);
   const player2Board = gameBoard(id);
 
-  deleteThisafter(player1Board);
-
+  //deleteThisafter(player1Board);
+  //gameOverUI();
   renderUI(player1Board, player2Board, player1, player2);
 };
 
