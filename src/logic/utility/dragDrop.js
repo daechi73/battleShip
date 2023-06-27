@@ -62,9 +62,7 @@ const dragEvent = (player1Board, player2Board, player1, player2) => {
           );
           player1Board.printBoard();
           positionUtility().disableCell(realCellToAppend, dragged);
-          if (
-            positionUtility().allShipsOnBoard(player1Board.getShips()) == true
-          ) {
+          if (player1Board.allShipsOnBoard() == true) {
             console.log("allShipOnBoard");
             renderGameStartBtn(
               player1Board,

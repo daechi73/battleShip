@@ -269,6 +269,13 @@ const gameBoard = (id) => {
     printBoard();
   };
 
+  const allShipsOnBoard = () => {
+    for (const ship of ships) {
+      if (ship.getCoord() == null) return false;
+    }
+    return true;
+  };
+
   return {
     placeShip,
     getBoard,
@@ -281,6 +288,7 @@ const gameBoard = (id) => {
     numCoordToAlphaNumCoord,
     autoPcBoard,
     alphaNumCoordToNumCoord,
+    allShipsOnBoard,
   };
 };
 
