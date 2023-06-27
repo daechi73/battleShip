@@ -1,15 +1,15 @@
 const computer = () => {
+  let coordToAttack;
   const makeMove = (board) => {
     const randomX = Math.floor(Math.random() * 10);
     const randomY = Math.floor(Math.random() * 10);
-    const coordToAttack = [randomX, randomY];
-    let pass = false;
+    coordToAttack = [randomX, randomY];
+
     if (board.checkCellAttacked(coordToAttack) === false) {
-      pass = true;
       return board.receiveAttack(coordToAttack);
     }
   };
-  return { name: "Computer", makeMove };
+  return { name: "Computer", makeMove, coordToAttack };
 };
 
 export default computer;
