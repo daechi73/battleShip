@@ -18,7 +18,8 @@ const gameBoard = (id) => {
   const submarine = ship("submarine" + `${id.id}`, 3);
   const destroyer = ship("destroyer" + `${id.id}`, 2);
   const scout = ship("fishingBoat" + `${id.id}`, 2);
-  const ships = [carrier, battleShip, cruiser, submarine, destroyer, scout];
+  //const ships = [carrier, battleShip, cruiser, submarine, destroyer, scout];
+  const ships = [carrier];
 
   const board = [];
   let numberOfSunkenShip = 0;
@@ -135,7 +136,7 @@ const gameBoard = (id) => {
       board[y][x].hit = true;
       if (ship.isSunk()) {
         numberOfSunkenShip++;
-        if (numberOfSunkenShip === 6)
+        if (numberOfSunkenShip === 1)
           // return `
           // You've hit ${ship.getName()} at position [${coordination}]
           // you've sunk a ${ship.getName()}!
