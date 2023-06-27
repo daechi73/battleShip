@@ -1,6 +1,6 @@
 import { renderShipsToBoard } from "../../render/renderUI/renderBoard";
 import { renderPlayer2Side } from "../../render/renderUI/renderPlayerSides";
-import cellRecieveAttackListener from "./cellRecieveAttack";
+import playRound from "./playRound.js";
 renderShipsToBoard;
 
 const gameStartBtnEventListener = (
@@ -18,7 +18,7 @@ const gameStartBtnEventListener = (
     renderPlayer2Side(player2Board);
     dragEventObject.removeEvents();
     changePositionObject.removeEvents();
-    cellRecieveAttackListener(player2Board, player1);
+    playRound(player2Board, player1);
     renderShipsToBoard(player1Board);
   });
 };
