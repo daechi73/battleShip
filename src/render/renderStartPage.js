@@ -1,6 +1,7 @@
 import UI from "../logic/UI/UI.js";
 
 const renderStart = () => {
+  const startPageContainer = document.createElement("div");
   const startPage = document.createElement("div");
   const title = document.createElement("div");
   const prompt = document.createElement("div");
@@ -12,6 +13,7 @@ const renderStart = () => {
   prompt.textContent = "Enter your Name";
   startBtn.textContent = "Start";
 
+  startPageContainer.classList.add("container-startPage");
   systemMsg.classList.add("startSystemMsg");
   startBtn.classList.add("startBtn");
   input.classList.add("nameInput");
@@ -24,11 +26,13 @@ const renderStart = () => {
   startPage.appendChild(input);
   startPage.appendChild(startBtn);
   startPage.appendChild(systemMsg);
-  document.body.appendChild(startPage);
+  startPageContainer.appendChild(startPage);
+  document.body.appendChild(startPageContainer);
 
   startBtn.addEventListener("click", () => {
     if (input.value !== "") {
       startPage.style.display = "none";
+      startPageContainer.remove();
       UI(input.value);
     } else {
       systemMsg.textContent = "Please enter your game name";
