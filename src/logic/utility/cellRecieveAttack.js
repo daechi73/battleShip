@@ -1,3 +1,4 @@
+import gameOverUI from "../UI/gameOverUI";
 const cellRecieveAttack = (playerBoard, player, e) => {
   // console.log(
   //   playerBoard.alphaNumCoordToNumCoord(e.target.dataset.alphanumcoord)
@@ -11,9 +12,12 @@ const cellRecieveAttack = (playerBoard, player, e) => {
       // console.log(result);
       if (result) {
         if (result.shipSunk)
-          console.log(`You've sank a ${result.ship.getName()}`);
-        if (result.sunkAllShips)
-          console.log(`You've sank all ships! game over!`);
+          console.log(`${player.name} sank a ${result.ship.getName()}`);
+        if (result.sunkAllShips) {
+          console.log(`${player.name} sank all ships! game over!`);
+          gameOverUI(player);
+        }
+
         e.target.innerHTML = "H";
         e.target.style.backgroundColor = "red";
       } else e.target.innerHTML += "X";
@@ -31,12 +35,14 @@ const cellRecieveAttack = (playerBoard, player, e) => {
     if (result) {
       if (result.shipSunk)
         console.log(`${player.name} sank a ${result.ship.getName()}`);
-      if (result.sunkAllShips)
+      if (result.sunkAllShips) {
         console.log(`${player.name} sank all ships Game Over!`);
+        gameOverUI(player);
+      }
+
       frontPlayerCell.innerHTML = "H";
       frontPlayerCell.style.backgroundColor = "red";
     } else frontPlayerCell.innerHTML += "X";
-    playerBoard.printBoard();
   }
 };
 
