@@ -1,9 +1,4 @@
 gh-page: https://daechi73.github.io/battleShip/
 
-----------------------------------------------------------------------------------------------------------------
-Starting Page:
-![startingPage](https://github.com/daechi73/battleShip/blob/main/screenShots/startPage.png)
-
-------------------------------------------------------------------------------------------------------------------
 
 
