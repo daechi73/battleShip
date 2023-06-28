@@ -2,9 +2,14 @@ import renderShip from "./renderShip.js";
 const renderPort = (ships) => {
   const portContainer = document.createElement("div");
   const port = document.createElement("div");
+  const direction = document.createElement("div");
+  direction.textContent = "Position your ships";
+  direction.classList.add("direction");
 
   portContainer.classList.add("container-port");
   port.classList.add("port");
+
+  port.appendChild(direction);
 
   ships.forEach((ship, i) => {
     const shipDock = document.createElement("div");
