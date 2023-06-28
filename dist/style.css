@@ -5,6 +5,13 @@ body {
   margin: 0;
   font-family: "Fasthand", cursive, "Pacifico", cursive, "Roboto",
     "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(24, 25, 33);
+  color: white;
+}
+.gameTitle {
+  font-size: 80px;
+  text-align: center;
+  box-shadow: "10px 20px 30px white";
 }
 .container-startPage {
   position: fixed;
@@ -14,11 +21,11 @@ body {
   right: 0;
   height: 100vh;
   z-index: 999;
-  background: rgba(93, 93, 86, 0.9);
+  background: rgba(93, 93, 86, 0.2);
 }
 .startPage {
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 30%;
   height: 500px;
   width: 500px;
@@ -26,7 +33,7 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background: rgb(71, 60, 60);
+  background: rgb(24, 25, 33);
   color: white;
   border-radius: 20px;
   border: solid;
@@ -52,7 +59,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  height: 100%;
+  margin-top: 70px;
 }
 .container-player1 {
   display: flex;
@@ -67,11 +74,15 @@ body {
   display: none;
   opacity: 0.5;
 }
+.container-player2 .container-Board {
+  margin-left: 60px;
+}
 .row {
   display: flex;
 }
 .cell {
   border: solid;
+  border-color: rgb(48, 171, 130);
   border-width: 1px;
   height: 35px;
   width: 35px;
@@ -80,8 +91,11 @@ body {
   font-size: 30px;
   text-align: center;
   line-height: 30px;
+  font-family: "Roboto";
 }
-
+.direction {
+  font-family: "Roboto";
+}
 .container-port {
   display: flex;
   justify-content: center;
@@ -128,6 +142,15 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+.gameStartBtn {
+  border-radius: 8px;
+  height: 30px;
+  width: 120px;
+  background-color: rgb(51, 52, 74);
+  color: white;
+  border: solid;
+  border-color: aquamarine;
+}
 .container-gameOverUI {
   position: fixed;
   top: 0;
@@ -142,7 +165,7 @@ body {
   position: absolute;
   top: 30%;
   left: 35%;
-  height: 200px;
+  height: 300px;
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -150,7 +173,25 @@ body {
   align-items: center;
   background: black;
   color: white;
+  border: solid;
+  border-color: aquamarine;
+}
+.GOUIHeader {
+  text-align: center;
+  font-size: 40px;
+}
+.playAgainTxt {
+  font-size: 30px;
+}
+.gameOverUI button {
+  width: 60px;
+  border-radius: 5px;
+  border: solid;
+  border-color: aquamarine;
 }
 .container-btn {
   display: flex;
+}
+.finalMsg {
+  font-size: 40px;
 }
