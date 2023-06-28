@@ -16,7 +16,7 @@ const renderGameOverUI = (player) => {
   playAgain.classList.add("playAgainTxt");
   gameOverUI.classList.add("gameOverUI");
   header.classList.add("GOUIHeader");
-  header.textContent = `${player.name} Won!`;
+  header.textContent = `'${player.name}' Won!`;
   playAgain.textContent = "Play again?";
   yesBtn.textContent = "Y";
   noBtn.textContent = "N";

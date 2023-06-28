@@ -37,7 +37,7 @@ body {
   color: white;
   border-radius: 20px;
   border: solid;
-  border-color: white;
+  border-color: aquamarine;
 }
 .startTitle {
   font-size: 60px;
@@ -163,8 +163,8 @@ body {
 }
 .gameOverUI {
   position: absolute;
-  top: 30%;
-  left: 35%;
+  top: 20%;
+  left: 38%;
   height: 300px;
   width: 300px;
   display: flex;
