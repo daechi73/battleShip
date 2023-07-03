@@ -1,5 +1,5 @@
 import positionUtility from "./positionUtility";
-import renderGameStartBtn from "../../render/renderUI/renderGameStartBtn";
+import gameStartBtnEvent from "./gameStartBtn";
 
 const dragEvent = (player1Board, player2Board, player1, player2) => {
   let dragged = null;
@@ -64,7 +64,7 @@ const dragEvent = (player1Board, player2Board, player1, player2) => {
           positionUtility().disableCell(realCellToAppend, dragged);
           if (player1Board.allShipsOnBoard() == true) {
             console.log("allShipOnBoard");
-            renderGameStartBtn(
+            gameStartBtnEvent(
               player1Board,
               player2Board,
               dragEventObj,

@@ -1,10 +1,9 @@
 import { renderShipsToBoard } from "../../render/renderUI/renderBoard";
 import { renderPlayer2Side } from "../../render/renderUI/renderPlayerSides";
 import playRound from "../playRound/playRound.js";
-renderShipsToBoard;
+import renderGameStartBtn from "../../render/renderUI/renderGameStartBtn";
 
-const gameStartBtnEventListener = (
-  gameStartBtn,
+const gameStartBtnEvent = (
   player1Board,
   player2Board,
   dragEventObject,
@@ -12,7 +11,9 @@ const gameStartBtnEventListener = (
   player1,
   player2
 ) => {
-  gameStartBtn.addEventListener("click", () => {
+  renderGameStartBtn();
+
+  document.querySelector(".gameStartBtn").addEventListener("click", () => {
     document.querySelector(".container-port").remove();
     player2Board.autoPcBoard();
     renderPlayer2Side(player2Board);
@@ -24,4 +25,4 @@ const gameStartBtnEventListener = (
     renderShipsToBoard(player1Board);
   });
 };
-export default gameStartBtnEventListener;
+export default gameStartBtnEvent;
