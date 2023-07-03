@@ -23,6 +23,16 @@ Set up your ships in the battle ground and destroy all of enemy's ships!
 - implement ai to computer
 - implement 2 player mode
 
+<u>Challenge faced</u>:
+
+- Positioning the ships on the board took a big chunk of the time coding this application.
+  - implementation of drag and drop was a new learning curve.
+  - changing the ships vertical/horizontal position while on the board was challenging as it dealt with
+    removing the whole element and creating a new one. This process caused eventlistener that was added to
+    the original element to be removed and finding a way to remove drag and drop event listeners to all other ships/cells for each change of position so the listeners are not duplicated was the hardest part.
+    - solution was to initializing the dragEvent object to a variable and using its reference to manipulate its
+      enclosed eventlisteners wherever needed.
+
 ## ENJOY!
 
 Starting Page:
