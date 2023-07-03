@@ -13,12 +13,6 @@ const renderUI = (player1Board, player2Board, player1, player2) => {
   );
   renderPlayer1Side(player1Board);
   renderPort(player1Board.getShips());
-  const dragEventObj = dragEvent(player1Board, player2Board, player1, player2);
-  const changePositionObject = changePositionListener(
-    player1Board,
-    dragEventObj
-  );
-  dragEventObj.addEvents(dragEventObj, changePositionObject);
 };
 
 export default renderUI;
