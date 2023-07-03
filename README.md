@@ -1,10 +1,10 @@
                                 Battleship
 
-gh-page: https://daechi73.github.io/battleShip/
+<u>gh-page</u>: https://daechi73.github.io/battleShip/
 
 Set up your ships in the battle ground and destroy all of enemy's ships!
 
-Guide:
+<u>Guide</u>:
 
 1. Enter username and press start button to get to the ship positioning UI
 2. Drag the ships where you want them on the board.
@@ -17,6 +17,11 @@ Guide:
 4. Gameover msg UI will pop up once the game is over asking to play again.
    - Y button will restart the game
    - N button will end the game.
+
+<u>Future update</u>:
+
+- implement ai to computer
+- implement 2 player mode
 
 ## ENJOY!
 
