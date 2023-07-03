@@ -1,3 +1,3 @@
-import renderStart from "./render/renderStartPage.js";
+import startUI from "./logic/UI/startUI";
 
-renderStart();
+startUI();
