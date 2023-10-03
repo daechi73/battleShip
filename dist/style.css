@@ -1,3 +1,6 @@
+:root {
+  font-size: 16px;
+}
 html,
 body {
   height: 100%;
@@ -9,7 +12,7 @@ body {
   color: white;
 }
 .gameTitle {
-  font-size: 80px;
+  font-size: 5rem;
   text-align: center;
   box-shadow: "10px 20px 30px white";
 }
@@ -19,14 +22,14 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100vh;
   z-index: 999;
+  height: 100%;
   background: rgba(93, 93, 86, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .startPage {
-  position: absolute;
-  top: 10%;
-  left: 30%;
   height: 500px;
   width: 500px;
   display: flex;
@@ -40,15 +43,15 @@ body {
   border-color: aquamarine;
 }
 .startTitle {
-  font-size: 60px;
+  font-size: 4rem;
 }
 .startPrompt {
-  font-size: 20px;
+  font-size: 1.5rem;
   font-style: italic;
 }
 .nameInput {
-  border-radius: 7px;
-  height: 20px;
+  border-radius: 1rem;
+  height: 1rem;
 }
 .startBtn {
   border-radius: 8px;
@@ -60,6 +63,7 @@ body {
   align-items: center;
   gap: 10px;
   margin-top: 70px;
+  padding: 0 0 0 50px;
 }
 .container-player1 {
   display: flex;
@@ -107,6 +111,9 @@ body {
   align-items: center;
   gap: 20px;
 }
+.container-direction {
+  width: 200px;
+}
 .dock {
   width: 200px;
 }
@@ -120,9 +127,11 @@ body {
   grid-template-columns: repeat(auto-fit, 35px);
   padding: 0;
   margin: 0;
+  display: flex;
 }
 
 .shipSubset {
+  flex: 1;
   margin: 0;
   padding: 0;
 }
@@ -194,4 +203,65 @@ body {
 }
 .finalMsg {
   font-size: 40px;
+}
+
+@media (max-width: 400px) {
+  .startPage {
+    width: 300px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 650px) {
+  .gameTitle {
+    font-size: 3rem;
+    margin-top: 2rem;
+  }
+  .cell {
+    height: 25px;
+    width: 25px;
+  }
+  .container-port {
+    width: 40%;
+  }
+  .port {
+    gap: 10px;
+  }
+  .dock {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .direction {
+    display: flex;
+    justify-content: end;
+  }
+  .container-main {
+    margin-top: 120px;
+  }
+}
+@media (max-width: 400px) {
+  .gameTitle {
+    margin-top: 1rem;
+  }
+  .container-main {
+    flex-direction: column;
+    padding: 0;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .container-player1 {
+    width: 100%;
+  }
+  .container-port {
+    width: 100%;
+  }
+  .dock {
+    justify-content: center;
+  }
+  .container-player2 {
+    width: 100%;
+  }
+  .gameStartBtn {
+    margin-top: 120px;
+  }
 }
