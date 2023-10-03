@@ -3,14 +3,7 @@ import { renderPlayer2Side } from "../../render/renderUI/renderPlayerSides";
 import playRound from "../playRound/playRound.js";
 import renderGameStartBtn from "../../render/renderUI/renderGameStartBtn";
 
-const gameStartBtnEvent = (
-  player1Board,
-  player2Board,
-  dragEventObject,
-  changePositionObject,
-  player1,
-  player2
-) => {
+const gameStartBtnEvent = (player1Board, player2Board, player1, player2) => {
   renderGameStartBtn();
 
   document.querySelector(".gameStartBtn").addEventListener("click", () => {
