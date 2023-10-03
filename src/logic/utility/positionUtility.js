@@ -108,7 +108,7 @@ const positionUtility = () => {
     if (startingCell.className === "shipSubset") {
       startingCell = startingCell.parentNode.parentNode;
     }
-    console.log("droping..");
+    console.log("checkingBoundary..");
     //return console.log(targetShip);
     if (targetShip.dataset.position === "horizontal") {
       const checkFrom = startingCell.dataset.column;
