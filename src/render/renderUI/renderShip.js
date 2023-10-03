@@ -27,6 +27,11 @@ const renderShip = (ship) => {
           height:25px;
           width:25px;
         `;
+        } else {
+          shipSubset.style.cssText = `
+          height:35px;
+          width:36px;
+        `;
         }
       });
 
@@ -42,6 +47,9 @@ const renderShip = (ship) => {
       if (windowWidthValidator()) {
         boat.style.width = `${ship.getLength() * 26}px`;
         boat.style.height = "25px";
+      } else {
+        boat.style.width = `${ship.getLength() * 36}px`;
+        boat.style.height = "35px";
       }
     });
 
@@ -70,6 +78,11 @@ const renderShip = (ship) => {
           height:26px;
           width:27px;
         `;
+        } else {
+          shipSubset.style.cssText = `
+          height:36px;
+          width:37px;
+        `;
         }
       });
 
@@ -83,6 +96,9 @@ const renderShip = (ship) => {
       if (windowWidthValidator()) {
         boat.style.height = `${ship.getLength() * 26}px`;
         boat.style.width = "25px";
+      } else {
+        boat.style.width = "35px";
+        boat.style.height = `${ship.getLength() * 36}px`;
       }
     });
 
