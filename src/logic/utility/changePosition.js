@@ -1,24 +1,24 @@
 import renderShip from "../../render/renderUI/renderShip";
 import positionUtility from "./positionUtility";
 
-const changePositionListener = (board, dragEventObject) => {
+const changePositionListener = (board, moveEventObject) => {
   const shipSubsets = document.querySelectorAll(".shipSubset");
   const changePositionFuncHolder = (e) => {
-    changePosition(board, e, dragEventObject);
+    changePosition(board, e, moveEventObject);
   };
   const addEvents = (() => {
     shipSubsets.forEach((shipSubset) => {
-      shipSubset.addEventListener("click", changePositionFuncHolder);
+      shipSubset.addEventListener("dblclick", changePositionFuncHolder);
     });
   })();
   const removeEvents = () => {
     shipSubsets.forEach((shipSubset) => {
-      shipSubset.removeEventListener("click", changePositionFuncHolder);
+      shipSubset.removeEventListener("dblclick", changePositionFuncHolder);
     });
   };
   return { removeEvents };
 };
-const changePosition = (board, e, dragEventObject) => {
+const changePosition = (board, e, moveEventObject) => {
   const shipContainer = e.target.parentNode.parentNode;
   console.log(e.target.parentNode.parentNode);
   if (shipContainer.classList.contains("dock")) {
@@ -27,10 +27,10 @@ const changePosition = (board, e, dragEventObject) => {
     // e.target.parentNode.remove();
     // const newShip = renderShip(ship);
     // shipContainer.appendChild(newShip);
-    // dragEventObject.recallDragEvents();
+    // moveEventObject.recallDragEvents();
     // newShip.childNodes.forEach((child) => {
-    //   child.addEventListener("click", (event) => {
-    //     changePosition(board, event, dragEventObject);
+    //   child.addEventListener("dblclick", (event) => {
+    //     changePosition(board, event, moveEventObject);
     //   });
     // });
   }
@@ -49,12 +49,12 @@ const changePosition = (board, e, dragEventObject) => {
         positionUtility().disableCell(shipContainer, newShip);
       }
     }
-    //console.log(dragEventObject);
-    dragEventObject.recallDragEvents();
+    //console.log(moveEventObject);
+    moveEventObject.recallDragEvents();
 
     newShip.childNodes.forEach((child) => {
-      child.addEventListener("click", (event) => {
-        changePosition(board, event, dragEventObject);
+      child.addEventListener("dblclick", (event) => {
+        changePosition(board, event, moveEventObject);
       });
     });
   }
