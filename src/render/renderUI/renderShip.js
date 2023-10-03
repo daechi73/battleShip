@@ -1,7 +1,4 @@
-const windowWidthValidator = () => {
-  if (window.innerWidth <= 650) return true;
-  else return false;
-};
+import mobileCheck from "../../logic/utility/mobileCheck";
 
 const renderShip = (ship) => {
   const boat = document.createElement("div");
@@ -17,7 +14,7 @@ const renderShip = (ship) => {
       //shipSubset.dataset.mainset = `${ship.getName()}`;
       //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
 
-      if (windowWidthValidator()) {
+      if (mobileCheck(650)) {
         shipSubset.style.cssText = `
         height:25px;
         width:25px;
@@ -29,7 +26,7 @@ const renderShip = (ship) => {
       `;
       }
       window.addEventListener("resize", () => {
-        if (windowWidthValidator()) {
+        if (mobileCheck(650)) {
           shipSubset.style.cssText = `
           height:25px;
           width:25px;
@@ -47,7 +44,7 @@ const renderShip = (ship) => {
 
     boat.classList.add("horizontal");
 
-    if (windowWidthValidator()) {
+    if (mobileCheck(650)) {
       boat.style.width = `${ship.getLength() * 26}px`;
       boat.style.height = "25px";
     } else {
@@ -55,7 +52,7 @@ const renderShip = (ship) => {
       boat.style.height = "35px";
     }
     window.addEventListener("resize", () => {
-      if (windowWidthValidator()) {
+      if (mobileCheck(650)) {
         boat.style.width = `${ship.getLength() * 26}px`;
         boat.style.height = "25px";
       } else {
@@ -78,7 +75,7 @@ const renderShip = (ship) => {
       //shipSubset.dataset.mainset = `${ship.getName()}`;
       //shipSubset.dataset.mainsetLength = `${ship.getLength()}`;
 
-      if (windowWidthValidator()) {
+      if (mobileCheck(650)) {
         shipSubset.style.cssText = `
         height:26px;
         width:27px;
@@ -91,7 +88,7 @@ const renderShip = (ship) => {
       }
 
       window.addEventListener("resize", () => {
-        if (windowWidthValidator()) {
+        if (mobileCheck(650)) {
           shipSubset.style.cssText = `
           height:26px;
           width:27px;
@@ -106,7 +103,7 @@ const renderShip = (ship) => {
 
       boat.appendChild(shipSubset);
     }
-    if (windowWidthValidator()) {
+    if (mobileCheck(650)) {
       boat.style.height = `${ship.getLength() * 26}px`;
       boat.style.width = "25px";
     } else {
@@ -115,7 +112,7 @@ const renderShip = (ship) => {
     }
 
     window.addEventListener("resize", () => {
-      if (windowWidthValidator()) {
+      if (mobileCheck(650)) {
         boat.style.height = `${ship.getLength() * 26}px`;
         boat.style.width = "25px";
       } else {
