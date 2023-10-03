@@ -3,13 +3,16 @@ const renderPort = (ships) => {
   const portContainer = document.createElement("div");
   const port = document.createElement("div");
   const direction = document.createElement("div");
+  const containerDirection = document.createElement("div");
   direction.textContent = "Position your ships";
   direction.classList.add("direction");
+  containerDirection.classList.add("container-direction");
 
   portContainer.classList.add("container-port");
   port.classList.add("port");
 
-  port.appendChild(direction);
+  containerDirection.appendChild(direction);
+  port.appendChild(containerDirection);
 
   ships.forEach((ship, i) => {
     const shipDock = document.createElement("div");
