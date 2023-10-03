@@ -5,6 +5,8 @@ import renderUI from "../../render/renderUI/renderUI";
 import shipId from "../utility/shipId.js";
 import dragEvent from "../utility/dragDrop";
 import changePositionListener from "../utility/changePosition";
+import clickDrop from "../utility/clickDrop";
+import mobileCheck from "../utility/mobileCheck";
 
 const UI = (playerName) => {
   const id = shipId();
@@ -14,21 +16,37 @@ const UI = (playerName) => {
   const player1Board = gameBoard(id);
   const player2Board = gameBoard(id);
 
-  //deleteThisafter(player1Board);
-  //gameOverUI();
-
   renderUI(player1Board, player2Board, player1, player2);
 
-  const dragEventObj = dragEvent(player1Board, player2Board, player1, player2);
-  const changePositionObject = changePositionListener(
-    player1Board,
-    dragEventObj
-  );
+  if (mobileCheck(400)) {
+    const moveEventObj = clickDrop(
+      player1Board,
+      player2Board,
+      player1,
+      player2
+    );
+    const changePositionObject = changePositionListener(
+      player1Board,
+      moveEventObj
+    );
 
-  dragEventObj.addEvents(dragEventObj, changePositionObject);
+    moveEventObj.addEvents(moveEventObj, changePositionObject);
+  } else {
+    const dragEventObj = dragEvent(
+      player1Board,
+      player2Board,
+      player1,
+      player2
+    );
+    const changePositionObject = changePositionListener(
+      player1Board,
+      dragEventObj
+    );
+    dragEventObj.addEvents(dragEventObj, changePositionObject);
+  }
 };
 
-const deleteThisafter = (player1Board) => {
+const devPreShipPosition = (player1Board) => {
   player1Board.getShips().forEach((ship) => {
     ship.setCoord([0, 0]);
   });
