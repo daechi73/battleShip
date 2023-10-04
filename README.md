@@ -7,9 +7,15 @@ Set up your ships in the battle ground and destroy all of enemy's ships!
 <u>Guide</u>:
 
 1. Enter username and press start button to get to the ship positioning UI
-2. Drag the ships where you want them on the board.
+
+2. a. For pc:
+   - Drag the ships where you want them on the board.
    - once the ship is on the board, you can click them to change its position horizontally or vertically.
    - once you are satisfied with the position of the ships, press the start game button to start the game.
+     b. For mobile:
+   - Select the ship to be positioned by clicking it.
+   - touch the board where you want to postion the ship.
+   - touching the ship on the board will change horizontal/vertical position.
 3. Click on the opponents battle ground (right) to play a round.
    - once you click on one of the cell the computer will attack yours automatically
    - when you see your board marked, it means you are free to attack again.
