@@ -12,20 +12,16 @@ const clickDrop = (player1Board, player2Board, player1, player2) => {
   const selectShip = (e) => {
     if (selected && e.target.parentNode.parentNode === null) {
       e.stopPropagation();
-      console.log(e.target.parentNode.parentNode);
       return;
     }
     if (e.target.classList.contains("shipSubset")) {
       e.stopPropagation();
       shipSubset = e.target.dataset.subset;
       selected = e.target.parentNode;
-      console.log(e.target);
-      console.log(selected.parentNode);
     }
   };
   const positionShip = (e) => {
     if (selected) {
-      console.log(e.target);
       if (positionUtility().checkBoundary(e.target, selected)) {
         if (positionUtility().checkCellAvailability(e.target, selected)) {
           if (e.target.classList.contains("droppable")) {
