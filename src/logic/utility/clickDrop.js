@@ -2,6 +2,7 @@ import positionUtility from "./positionUtility";
 import gameStartBtnEvent from "./gameStartBtn";
 
 const clickDrop = (player1Board, player2Board, player1, player2) => {
+  const type = "click";
   let selected = null;
   let shipSubset = null;
   let moveEventObj;
@@ -99,8 +100,10 @@ const clickDrop = (player1Board, player2Board, player1, player2) => {
   const getSelected = () => {
     return selected;
   };
-
-  return { recallDragEvents, addEvents, setSelected, getSelected };
+  const getType = () => {
+    return type;
+  };
+  return { recallDragEvents, addEvents, setSelected, getSelected, getType };
 };
 
 export default clickDrop;

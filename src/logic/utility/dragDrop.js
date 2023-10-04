@@ -2,6 +2,7 @@ import positionUtility from "./positionUtility";
 import gameStartBtnEvent from "./gameStartBtn";
 
 const dragEvent = (player1Board, player2Board, player1, player2) => {
+  const type = "drag";
   let dragged = null;
   let shipSubset = null;
   let dragEventObj;
@@ -64,14 +65,7 @@ const dragEvent = (player1Board, player2Board, player1, player2) => {
           positionUtility().disableCell(realCellToAppend, dragged);
           if (player1Board.allShipsOnBoard() == true) {
             console.log("allShipOnBoard");
-            gameStartBtnEvent(
-              player1Board,
-              player2Board,
-              dragEventObj,
-              changePositionObj,
-              player1,
-              player2
-            );
+            gameStartBtnEvent(player1Board, player2Board, player1, player2);
           }
         }
       }
@@ -119,8 +113,11 @@ const dragEvent = (player1Board, player2Board, player1, player2) => {
     removeEvents();
     addEvents();
   };
+  const getType = () => {
+    return type;
+  };
 
-  return { addEvents, recallDragEvents, removeEvents };
+  return { addEvents, recallDragEvents, removeEvents, getType };
 };
 
 export default dragEvent;
