@@ -10,7 +10,11 @@ const clickDrop = (player1Board, player2Board, player1, player2) => {
   const cells = document.querySelectorAll(".cell");
 
   const selectShip = (e) => {
-    if (selected && e.target.parentNode !== selected) {
+    if (
+      selected &&
+      e.target.parentNode !== selected &&
+      e.target.parentNode.parentNode === "cell"
+    ) {
       e.stopPropagation();
       return;
     }
