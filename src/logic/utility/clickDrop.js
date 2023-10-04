@@ -8,14 +8,11 @@ const clickDrop = (player1Board, player2Board, player1, player2) => {
   let moveEventObj;
   let changePositionObj;
   const cells = document.querySelectorAll(".cell");
-
+  //e.target.parentNode.parentNode === "cell"
   const selectShip = (e) => {
-    if (
-      selected &&
-      e.target.parentNode !== selected &&
-      e.target.parentNode.parentNode === "cell"
-    ) {
+    if (selected && e.target.parentNode.parentNode === null) {
       e.stopPropagation();
+      console.log(e.target.parentNode.parentNode);
       return;
     }
     if (e.target.classList.contains("shipSubset")) {
