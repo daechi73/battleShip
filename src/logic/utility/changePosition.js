@@ -51,7 +51,9 @@ const changePosition = (board, e, moveEventObject) => {
     }
     //console.log(moveEventObject);
     moveEventObject.recallDragEvents();
-    moveEventObject.setSelected(newShip);
+    if (moveEventObject.getType() === "click") {
+      moveEventObject.setSelected(newShip);
+    }
 
     newShip.childNodes.forEach((child) => {
       child.addEventListener("click", (event) => {
