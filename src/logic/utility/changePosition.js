@@ -47,19 +47,20 @@ const changePosition = (board, e, moveEventObject) => {
         e.target.parentNode.remove();
         shipContainer.appendChild(newShip);
         positionUtility().disableCell(shipContainer, newShip);
+
+        moveEventObject.recallDragEvents();
+        if (moveEventObject.getType() === "click") {
+          moveEventObject.setSelected(newShip);
+        }
+
+        newShip.childNodes.forEach((child) => {
+          child.addEventListener("click", (event) => {
+            changePosition(board, event, moveEventObject);
+          });
+        });
       }
     }
     //console.log(moveEventObject);
-    moveEventObject.recallDragEvents();
-    if (moveEventObject.getType() === "click") {
-      moveEventObject.setSelected(newShip);
-    }
-
-    newShip.childNodes.forEach((child) => {
-      child.addEventListener("click", (event) => {
-        changePosition(board, event, moveEventObject);
-      });
-    });
   }
 };
 
