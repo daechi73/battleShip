@@ -1,5 +1,6 @@
 import positionUtility from "./positionUtility";
 import gameStartBtnEvent from "./gameStartBtn";
+
 const clickDrop = (player1Board, player2Board, player1, player2) => {
   let selected = null;
   let shipSubset = null;
@@ -8,6 +9,10 @@ const clickDrop = (player1Board, player2Board, player1, player2) => {
   const cells = document.querySelectorAll(".cell");
 
   const selectShip = (e) => {
+    if (selected && e.target.parentNode !== selected) {
+      e.stopPropagation();
+      return;
+    }
     if (e.target.classList.contains("shipSubset")) {
       e.stopPropagation();
       shipSubset = e.target.dataset.subset;
@@ -87,7 +92,15 @@ const clickDrop = (player1Board, player2Board, player1, player2) => {
     addEvents();
   };
 
-  return { recallDragEvents, addEvents };
+  const setSelected = (newShip) => {
+    selected = newShip;
+  };
+
+  const getSelected = () => {
+    return selected;
+  };
+
+  return { recallDragEvents, addEvents, setSelected, getSelected };
 };
 
 export default clickDrop;
