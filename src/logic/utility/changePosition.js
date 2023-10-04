@@ -8,19 +8,19 @@ const changePositionListener = (board, moveEventObject) => {
   };
   const addEvents = (() => {
     shipSubsets.forEach((shipSubset) => {
-      shipSubset.addEventListener("dblclick", changePositionFuncHolder);
+      shipSubset.addEventListener("click", changePositionFuncHolder);
     });
   })();
   const removeEvents = () => {
     shipSubsets.forEach((shipSubset) => {
-      shipSubset.removeEventListener("dblclick", changePositionFuncHolder);
+      shipSubset.removeEventListener("click", changePositionFuncHolder);
     });
   };
   return { removeEvents };
 };
 const changePosition = (board, e, moveEventObject) => {
   const shipContainer = e.target.parentNode.parentNode;
-  console.log(e.target.parentNode.parentNode);
+  //console.log(e.target.parentNode.parentNode);
   if (shipContainer.classList.contains("dock")) {
     // const ship = board.findShip(e.target.parentNode.id);
     // ship.changePosition();
@@ -29,7 +29,7 @@ const changePosition = (board, e, moveEventObject) => {
     // shipContainer.appendChild(newShip);
     // moveEventObject.recallDragEvents();
     // newShip.childNodes.forEach((child) => {
-    //   child.addEventListener("dblclick", (event) => {
+    //   child.addEventListener("click", (event) => {
     //     changePosition(board, event, moveEventObject);
     //   });
     // });
@@ -51,9 +51,10 @@ const changePosition = (board, e, moveEventObject) => {
     }
     //console.log(moveEventObject);
     moveEventObject.recallDragEvents();
+    moveEventObject.setSelected(newShip);
 
     newShip.childNodes.forEach((child) => {
-      child.addEventListener("dblclick", (event) => {
+      child.addEventListener("click", (event) => {
         changePosition(board, event, moveEventObject);
       });
     });
